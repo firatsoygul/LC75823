@@ -16,7 +16,7 @@ int LetterLenght=0;
 int n=0;
 int kuz;
 
-char yz[] = "BU METIN EKRANDA GÖRUNECEK";
+char yz[] = "BU METIN EKRANDA GORUNECEK";
 
 void setup() {
 
