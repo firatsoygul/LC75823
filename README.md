@@ -7,4 +7,4 @@
 ![Sample_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/IMG_0103.JPG?raw=true)
 
 
-![Blaukpunt TS X-BASS](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/dis_kapak.jpg?raw=true)
+
