@@ -9,8 +9,7 @@
 #define LC75823_h
 #include "Arduino.h"
 
-enum Symbol
-{
+enum Symbol {
   ST,
   MONO,
   LOC,
@@ -40,8 +39,7 @@ enum Symbol
   VOLUME_RIGHT_8
 };
 
-class LC75823
-{
+class LC75823 {
 public:
   LC75823();
   void begin(int chipEnabledPin, int address);
@@ -85,36 +83,38 @@ private:
   int _volumeEndValue = 8;
   boolean _iconSt = false;
   boolean _iconRock = false;
-  //boolean _iconMono = false;
-  //boolean _iconLoc = false;
-  //boolean _iconClas = false;
-  //boolean _iconPop = false;
-  //boolean _iconTeyp = false;
-  //boolean _iconCd = false;
-  //boolean _iconXBass = false;
-  //boolean _iconChart1 = false;
-  //boolean _iconChart2 = false;
-  //boolean _iconChart3 = false;
-  //boolean _iconVolume1 = false;
-  //boolean _iconVolumeLeft2 = false;
-  //boolean _iconVolumeLeft3 = false;
-  //boolean _iconVolumeLeft4 = false;
-  //boolean _iconVolumeLeft5 = false;
-  //boolean _iconVolumeLeft6 = false;
-  //boolean _iconVolumeLeft7 = false;
-  //boolean _iconVolumeLeft8 = false;
-  //boolean _iconVolumeRight2 = false;
-  //boolean _iconVolumeRight3 = false;
-  //boolean _iconVolumeRight4 = false;
-  //boolean _iconVolumeRight5 = false;
-  //boolean _iconVolumeRight6 = false;
-  //boolean _iconVolumeRight7 = false;
-  //boolean _iconVolumeRight8 = false;
-
+  // boolean _iconMono = false;
+  // boolean _iconLoc = false;
+  // boolean _iconClas = false;
+  // boolean _iconPop = false;
+  // boolean _iconTeyp = false;
+  // boolean _iconCd = false;
+  // boolean _iconXBass = false;
+  // boolean _iconChart1 = false;
+  // boolean _iconChart2 = false;
+  // boolean _iconChart3 = false;
+  // boolean _iconVolume1 = false;
+  // boolean _iconVolumeLeft2 = false;
+  // boolean _iconVolumeLeft3 = false;
+  // boolean _iconVolumeLeft4 = false;
+  // boolean _iconVolumeLeft5 = false;
+  // boolean _iconVolumeLeft6 = false;
+  // boolean _iconVolumeLeft7 = false;
+  // boolean _iconVolumeLeft8 = false;
+  // boolean _iconVolumeRight2 = false;
+  // boolean _iconVolumeRight3 = false;
+  // boolean _iconVolumeRight4 = false;
+  // boolean _iconVolumeRight5 = false;
+  // boolean _iconVolumeRight6 = false;
+  // boolean _iconVolumeRight7 = false;
+  // boolean _iconVolumeRight8 = false;
   byte _symbols[5];         // 5 SPI byte package for symbol data
-  byte _bellekTasmasi1[10]; //Bellek taşmasına geçici çözüm.
+  byte _bellekTasmasi1[10]; // Bellek taşmasına geçici çözüm.
   byte _screen[15];         // 15 SPI byte package for character data
-  byte _bellekTasmasi2[10]; //Bellek taşmasına geçici çözüm. leftBased() metodundaki for dönüsünün ikinci if sorgusunda bulunan -1 lik sağa öteleme düzeltildikten sonra kaldırılabilir.
+  byte _bellekTasmasi2[10]; // Bellek taşmasına geçici çözüm. leftBased()
+                            // metodundaki for dönüsünün ikinci if sorgusunda
+                            // bulunan -1 lik sağa öteleme düzeltildikten sonra
+                            // kaldırılabilir.
 };
 
 #endif

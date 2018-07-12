@@ -17,5 +17,7 @@ void loop() {
 
     lcd.clear();
     lcd.sText(f);
-
+    lcd.symbol(CLAS, 1);
+    lcd.symbol(X_BASS, 1);
+    lcd.volumeLeftLevel(4);
 }

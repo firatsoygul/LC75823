@@ -8,7 +8,6 @@
 #include "LC75823.h"
 #include <SPI.h>
 #include "character.h"
-#include "utf8ascii.h"
 
 LC75823::LC75823() {
 
@@ -39,7 +38,7 @@ void LC75823::begin(int chipEnabledPin, int address) {
 void LC75823::_textSize(char text[]) {
   _textLenght = 0;
   while (text[_textLenght] != '\0') {
-      _textLenght++;
+    _textLenght++;
   }
 }
 
@@ -61,7 +60,7 @@ void LC75823::speed(int textSpeed) { _textSpeed = textSpeed; }
  */
 void LC75823::clear() {
   memset(_container, 0, _containerSize);
-  //memset(_symbol, 0, 4); // Sembolleri silmek için.
+  // memset(_symbol, 0, 4); // Sembolleri silmek için.
   _sScroll = 0;
   _loopNumber = 0;
   _print(_address, _screen, _symbols);
@@ -74,8 +73,7 @@ void LC75823::clear() {
  * Input : None
  * Output : None
  */
-void LC75823::reset()
-{
+void LC75823::reset() {
   memset(_screen, 0, _containerSize);
   memset(_container, 0, _containerSize);
   memset(_symbols, 0, 4);
@@ -90,8 +88,7 @@ void LC75823::reset()
  * Input : None
  * Output : None
  */
-void LC75823::display()
-{
+void LC75823::display() {
   bitWrite(_symbols[4], 1, 0);
   _print(_address, _screen, _symbols);
 }
@@ -102,8 +99,7 @@ void LC75823::display()
  * Input : None
  * Output : None
  */
-void LC75823::noDisplay()
-{
+void LC75823::noDisplay() {
   bitWrite(_symbols[4], 1, 1);
   _print(_address, _screen, _symbols);
 }
@@ -134,12 +130,12 @@ void LC75823::volumeEndValue(int endValue){
  * Input : int levelValue (Sol volume seviye değeri).
  * Output : None
  */
-void LC75823::volumeLeftLevel(int levelValue)
-{
-  int convertedLevelValue = ((levelValue - _volumeStartValue) / ((_volumeEndValue - _volumeStartValue) / 8));
-  
+void LC75823::volumeLeftLevel(int levelValue) {
+  int convertedLevelValue = ((levelValue - _volumeStartValue) /
+                             ((_volumeEndValue - _volumeStartValue) / 8));
+
   _symbols[1] = B11111111;
-  _symbols[1] >>= 8-convertedLevelValue;
+  _symbols[1] >>= 8 - convertedLevelValue;
   bitWrite(_symbols[1], 7, _iconRock);
   _volumeLeftLevel = convertedLevelValue;
   if (_volumeLeftLevel == 0 && _volumeRightLevel == 0) {
@@ -156,12 +152,11 @@ void LC75823::volumeLeftLevel(int levelValue)
  * Input : int levelValue (Sağ volume seviye değeri).
  * Output : None
  */
-void LC75823::volumeRightLevel(int levelValue)
-{
-  int convertedLevelValue = ((levelValue - _volumeStartValue) / ((_volumeEndValue - _volumeStartValue) / 8));
-  
+void LC75823::volumeRightLevel(int levelValue) {
+  int convertedLevelValue = ((levelValue - _volumeStartValue) /
+                             ((_volumeEndValue - _volumeStartValue) / 8));
   _symbols[3] = B11111111;
-  _symbols[3] >>= 8-convertedLevelValue;
+  _symbols[3] >>= 8 - convertedLevelValue;
   bitWrite(_symbols[3], 7, _iconRock);
   _volumeLeftLevel = convertedLevelValue;
   if (_volumeLeftLevel == 0 && _volumeRightLevel == 0) {
@@ -179,7 +174,6 @@ void LC75823::volumeRightLevel(int levelValue)
  * Output : None
  */
 void LC75823::sChart(boolean chartValue) {
-
   if (chartValue) {
     for (int i = 2; i < 5; i++) {
       bitWrite(_symbols[0], 2, 0);
@@ -197,10 +191,7 @@ void LC75823::sChart(boolean chartValue) {
  * Input : None
  * Output : int
  */
-int LC75823::textLoopCount()
-{
-  return _loopNumber;
-}
+int LC75823::textLoopCount() { return _loopNumber; }
 
 /*
 * Function Name: _textLoop
@@ -234,32 +225,19 @@ void LC75823::text(char text[]) {
  * Input : char text[] - Yazdırılacak metni taşıyan char dizisi.
  * Output : None
  */
-void LC75823::sText(char text[])
-{
+void LC75823::sText(char text[]) {
   _textSize(text);
-  Serial.println(text);
   char _screenText[8];
-  for (int i = 0; i < 8; i++)
-  {
+  for (int i = 0; i < 8; i++) {
     int c = text[i + _tScroll] - 32;
-
     _screenText[i] = text[i + _tScroll];
-
-    if ((i + _tScroll) >= _textLenght)
-    {
+    if ((i + _tScroll) >= _textLenght) {
       _screenText[i] = ' ';
     }
-
-    Serial.print((int)_screenText[i]);
-    Serial.print(" ...  ");
-    Serial.println((char)_screenText[i]);
   }
-  if (_tScroll == _textLenght)
-  {
+  if (_tScroll == _textLenght) {
     _tScroll = 0;
-  }
-  else
-  {
+  } else {
     _tScroll++;
   }
   _letters(_screenText);
@@ -275,10 +253,7 @@ void LC75823::sText(char text[])
  * Input : None
  * Output : None
  */
-void LC75823::_setSymbols() {
-  bitWrite(_screen[0], 7, _iconSt);
-  
-}
+void LC75823::_setSymbols() { bitWrite(_screen[0], 7, _iconSt); }
 
 /*
  * Function Name: _setLetters
@@ -348,38 +323,94 @@ void LC75823::_print(int pAddress, byte pScreen[], byte pSymbols[]) {
  */
 void LC75823::symbol(enum Symbol symbolName, boolean status) {
   switch (symbolName) {
-    case ST : _iconSt = status; bitWrite(_screen[0], 7, status); break; //open or close ST icon. 
+  case ST:
+    _iconSt = status;
+    bitWrite(_screen[0], 7, status);
+    break; // open or close ST icon.
 
-    case POP: bitWrite(_symbols[0], 0, status); break;
-    case CLAS: bitWrite(_symbols[0], 1, status); break;    
-    case CHART_1: bitWrite(_symbols[0], 2, status); break;
-    case CHART_2: bitWrite(_symbols[0], 3, status); break;
-    case CHART_3: bitWrite(_symbols[0], 4, status); break;
-    case X_BASS: bitWrite(_symbols[0], 5, status); break;
-    case TEYP_ICON: bitWrite(_symbols[0], 7, status); break;
+  case POP:
+    bitWrite(_symbols[0], 0, status);
+    break;
+  case CLAS:
+    bitWrite(_symbols[0], 1, status);
+    break;
+  case CHART_1:
+    bitWrite(_symbols[0], 2, status);
+    break;
+  case CHART_2:
+    bitWrite(_symbols[0], 3, status);
+    break;
+  case CHART_3:
+    bitWrite(_symbols[0], 4, status);
+    break;
+  case X_BASS:
+    bitWrite(_symbols[0], 5, status);
+    break;
+  case TEYP_ICON:
+    bitWrite(_symbols[0], 7, status);
+    break;
 
-    case VOLUME_LEFT_2: bitWrite(_symbols[1], 0, status); break;
-    case VOLUME_LEFT_3: bitWrite(_symbols[1], 1, status); break;
-    case VOLUME_LEFT_4: bitWrite(_symbols[1], 2, status); break;
-    case VOLUME_LEFT_5: bitWrite(_symbols[1], 3, status); break;
-    case VOLUME_LEFT_6: bitWrite(_symbols[1], 4, status); break;
-    case VOLUME_LEFT_7: bitWrite(_symbols[1], 5, status); break;
-    case VOLUME_LEFT_8: bitWrite(_symbols[1], 6, status); break;
-    case ROCK: bitWrite(_symbols[1], 7, status); _iconRock = status; break;
+  case VOLUME_LEFT_2:
+    bitWrite(_symbols[1], 0, status);
+    break;
+  case VOLUME_LEFT_3:
+    bitWrite(_symbols[1], 1, status);
+    break;
+  case VOLUME_LEFT_4:
+    bitWrite(_symbols[1], 2, status);
+    break;
+  case VOLUME_LEFT_5:
+    bitWrite(_symbols[1], 3, status);
+    break;
+  case VOLUME_LEFT_6:
+    bitWrite(_symbols[1], 4, status);
+    break;
+  case VOLUME_LEFT_7:
+    bitWrite(_symbols[1], 5, status);
+    break;
+  case VOLUME_LEFT_8:
+    bitWrite(_symbols[1], 6, status);
+    break;
+  case ROCK:
+    bitWrite(_symbols[1], 7, status);
+    _iconRock = status;
+    break;
 
-    case VOLUME_1: bitWrite(_symbols[2], 0, status); break;
+  case VOLUME_1:
+    bitWrite(_symbols[2], 0, status);
+    break;
 
-    case VOLUME_RIGHT_2: bitWrite(_symbols[3], 0, status); break;
-    case VOLUME_RIGHT_3: bitWrite(_symbols[3], 1, status); break;
-    case VOLUME_RIGHT_4: bitWrite(_symbols[3], 2, status); break;
-    case VOLUME_RIGHT_5: bitWrite(_symbols[3], 3, status); break;
-    case VOLUME_RIGHT_6: bitWrite(_symbols[3], 4, status); break;
-    case VOLUME_RIGHT_7: bitWrite(_symbols[3], 5, status); break;
-    case VOLUME_RIGHT_8: bitWrite(_symbols[3], 6, status); break;
+  case VOLUME_RIGHT_2:
+    bitWrite(_symbols[3], 0, status);
+    break;
+  case VOLUME_RIGHT_3:
+    bitWrite(_symbols[3], 1, status);
+    break;
+  case VOLUME_RIGHT_4:
+    bitWrite(_symbols[3], 2, status);
+    break;
+  case VOLUME_RIGHT_5:
+    bitWrite(_symbols[3], 3, status);
+    break;
+  case VOLUME_RIGHT_6:
+    bitWrite(_symbols[3], 4, status);
+    break;
+  case VOLUME_RIGHT_7:
+    bitWrite(_symbols[3], 5, status);
+    break;
+  case VOLUME_RIGHT_8:
+    bitWrite(_symbols[3], 6, status);
+    break;
 
-    case MONO:  bitWrite(_symbols[4], 4, status); break;
-    case LOC:  bitWrite(_symbols[4], 5, status); break;
-    case CD_ICON:  bitWrite(_symbols[4], 7, status); break;
+  case MONO:
+    bitWrite(_symbols[4], 4, status);
+    break;
+  case LOC:
+    bitWrite(_symbols[4], 5, status);
+    break;
+  case CD_ICON:
+    bitWrite(_symbols[4], 7, status);
+    break;
   default:;
     break;
   }
@@ -394,28 +425,64 @@ void LC75823::symbol(enum Symbol symbolName, boolean status) {
  * Output : None
  */
 void LC75823::volumeChart(int volumeChartNo, boolean status) {
-  switch (volumeChartNo) {  
-    case 16: bitWrite(_symbols[0], 2, status); break; //CHART_1
-    case 17: bitWrite(_symbols[0], 3, status); break; //CHART_2
-    case 18: bitWrite(_symbols[0], 4, status); break; //CHART_3
+  switch (volumeChartNo) {
+  case 16:
+    bitWrite(_symbols[0], 2, status);
+    break; // CHART_1
+  case 17:
+    bitWrite(_symbols[0], 3, status);
+    break; // CHART_2
+  case 18:
+    bitWrite(_symbols[0], 4, status);
+    break; // CHART_3
 
-    case 2: bitWrite(_symbols[1], 0, status); break; //VOLUME_LEFT_2
-    case 3: bitWrite(_symbols[1], 1, status); break; //VOLUME_LEFT_3
-    case 4: bitWrite(_symbols[1], 2, status); break; //VOLUME_LEFT_4
-    case 5: bitWrite(_symbols[1], 3, status); break; //VOLUME_LEFT_5
-    case 6: bitWrite(_symbols[1], 4, status); break; //VOLUME_LEFT_6
-    case 7: bitWrite(_symbols[1], 5, status); break; //VOLUME_LEFT_7
-    case 8: bitWrite(_symbols[1], 6, status); break; //VOLUME_LEFT_8
+  case 2:
+    bitWrite(_symbols[1], 0, status);
+    break; // VOLUME_LEFT_2
+  case 3:
+    bitWrite(_symbols[1], 1, status);
+    break; // VOLUME_LEFT_3
+  case 4:
+    bitWrite(_symbols[1], 2, status);
+    break; // VOLUME_LEFT_4
+  case 5:
+    bitWrite(_symbols[1], 3, status);
+    break; // VOLUME_LEFT_5
+  case 6:
+    bitWrite(_symbols[1], 4, status);
+    break; // VOLUME_LEFT_6
+  case 7:
+    bitWrite(_symbols[1], 5, status);
+    break; // VOLUME_LEFT_7
+  case 8:
+    bitWrite(_symbols[1], 6, status);
+    break; // VOLUME_LEFT_8
 
-    case 1: bitWrite(_symbols[2], 0, status); break; //VOLUME_1
+  case 1:
+    bitWrite(_symbols[2], 0, status);
+    break; // VOLUME_1
 
-    case 9: bitWrite(_symbols[3], 0, status); break; // VOLUME_RIGHT_2
-    case 10: bitWrite(_symbols[3], 1, status); break; // VOLUME_RIGHT_3
-    case 11: bitWrite(_symbols[3], 2, status); break; // VOLUME_RIGHT_4
-    case 12: bitWrite(_symbols[3], 3, status); break; // VOLUME_RIGHT_5
-    case 13: bitWrite(_symbols[3], 4, status); break; // VOLUME_RIGHT_6
-    case 14: bitWrite(_symbols[3], 5, status); break; // VOLUME_RIGHT_7
-    case 15: bitWrite(_symbols[3], 6, status); break; // VOLUME_RIGHT_8
+  case 9:
+    bitWrite(_symbols[3], 0, status);
+    break; // VOLUME_RIGHT_2
+  case 10:
+    bitWrite(_symbols[3], 1, status);
+    break; // VOLUME_RIGHT_3
+  case 11:
+    bitWrite(_symbols[3], 2, status);
+    break; // VOLUME_RIGHT_4
+  case 12:
+    bitWrite(_symbols[3], 3, status);
+    break; // VOLUME_RIGHT_5
+  case 13:
+    bitWrite(_symbols[3], 4, status);
+    break; // VOLUME_RIGHT_6
+  case 14:
+    bitWrite(_symbols[3], 5, status);
+    break; // VOLUME_RIGHT_7
+  case 15:
+    bitWrite(_symbols[3], 6, status);
+    break; // VOLUME_RIGHT_8
   default:;
     break;
   }
@@ -430,134 +497,17 @@ void LC75823::volumeChart(int volumeChartNo, boolean status) {
  * Output : None
  */
 void LC75823::_letters(char gk[]) {
-  Serial.println("----gk---- ");
   int d = 0;
   int bos = 0;
-  Serial.println("----for----");
-  for(int i = 0; i < 8; i++)
-  {
-    int c = gk[i]-32;
+  for (int i = 0; i < 8; i++) {
+    int c = gk[i] - 32;
     if (c >= 0 && c <= 94) {
-      _container[d] = character14SEG[c][0];
-      _container[d + 1] = character14SEG[c][1];
-      //d += 2;
-      Serial.print("----for FINISH---- ");
-      Serial.print(i);
-      Serial.print(" ...  ");
-      Serial.print(gk[i]);
-      Serial.println((char)gk[i]);
+      _container[d] = pgm_read_byte(&character14SEG[c][0]);
+      _container[d + 1] = pgm_read_byte(&character14SEG[c][1]);
     } else {
       _container[d] = 0;
       _container[d + 1] = 0;
-      //d-=2;
-      Serial.print(" ... ELSE ...  ");
-      Serial.println(c);
     }
     d += 2;
-  }
-  
-  
-}
-
-void LC75823::_letters_ORJ(uint8_t gk[]) {
-  int d = 0;
-  for (int j = 0; j < 8; j++) {
-    switch (gk[j]) {
-      case ' ' : _container[d] = 0; _container[d+1] = 0; break; 
-      case 'A' : _container[d] = 0x32; _container[d+1] = 0x8B; break;//50-139
-      case 'B' : _container[d] = 1; _container[d+1] = 203; break;
-      case 'C' : _container[d] = 49; _container[d+1] = 128; break;
-      case 'D' : _container[d] = 1; _container[d+1] = 195; break;
-      case 'E' : _container[d] = 51; _container[d+1] = 128; break;
-      case 'F' : _container[d] = 50; _container[d+1] = 128; break;
-      case 'G' : _container[d] = 49; _container[d+1] = 137; break;
-      case 'H' : _container[d] = 50; _container[d+1] = 11; break;
-      case 'I' : _container[d] = 1; _container[d+1] = 192; break;
-      case 'J' : _container[d] = 17; _container[d+1] = 3; break;
-      case 'K' : _container[d] = 50; _container[d+1] = 48; break;
-      case 'L' : _container[d] = 49; _container[d+1] = 0; break;
-      case 'M' : _container[d] = 52; _container[d+1] = 19; break;
-      case 'N' : _container[d] = 52; _container[d+1] = 35; break;
-      case 'O' : _container[d] = 49; _container[d+1] = 131; break;
-      case 'P' : _container[d] = 50; _container[d+1] = 138; break;
-      case 'Q' : _container[d] = 49; _container[d+1] = 163; break;
-      case 'R' : _container[d] = 50; _container[d+1] = 170; break;
-      case 'S' : _container[d] = 5; _container[d+1] = 137; break;
-      case 'T' : _container[d] = 0; _container[d+1] = 192; break;
-      case 'U' : _container[d] = 49; _container[d+1] = 3; break;
-      case 'V' : _container[d] = 56; _container[d+1] = 16; break;
-      case 'W' : _container[d] = 56; _container[d+1] = 35; break;
-      case 'X' : _container[d] = 12; _container[d+1] = 48; break;
-      case 'Y' : _container[d] = 4; _container[d+1] = 11; break;
-      case 'Z' : _container[d] = 9; _container[d+1] = 144; break;
-      case '-' : _container[d] = 2; _container[d+1] = 8; break;
-      case '+' : _container[d] = 2; _container[d+1] = 72; break;
-      case '=' : _container[d] = 3; _container[d+1] = 8; break;
-      case '/' : _container[d] = 8; _container[d+1] = 16; break;
-      case '%' : _container[d] = 40; _container[d+1] = 17; break;
-      case '\\' : _container[d] = 4; _container[d+1] = 32; break;
-      case '_' : _container[d] = 1; _container[d+1] = 0; break;
-      case '(' : _container[d] = 49; _container[d+1] = 128; break;
-      case ')' : _container[d] = 1; _container[d+1] = 131; break;
-      case '*' : _container[d] = 14; _container[d+1] = 56; break;
-      case '#' : _container[d] = 63; _container[d+1] = 251; break;
-      case '>' : _container[d] = 12; _container[d+1] = 0; break;
-      case '<' : _container[d] = 0; _container[d+1] = 48; break;
-      case '.' : _container[d] = 8; _container[d+1] = 0; break;
-      case ',' : _container[d] = 8; _container[d+1] = 0; break;
-      case '?' : _container[d] = 18; _container[d+1] = 138; break;
-      case '0' : _container[d] = 57; _container[d+1] = 147; break;
-      case '1' : _container[d] = 0; _container[d+1] = 19; break;
-      case '2' : _container[d] = 19; _container[d+1] = 144; break;
-      case '3' : _container[d] = 1; _container[d+1] = 139; break;
-      case '4' : _container[d] = 34; _container[d+1] = 11; break;
-      case '5' : _container[d] = 35; _container[d+1] = 137; break;
-      case '6' : _container[d] = 51; _container[d+1] = 137; break;
-      case '7' : _container[d] = 0; _container[d+1] = 131; break;
-      case '8' : _container[d] = 51; _container[d+1] = 139; break;
-      case '9' : _container[d] = 35; _container[d+1] = 139; break;
-      case 'a' : _container[d] = 50; _container[d+1] = 139; break; //A
-      case 'b' : _container[d] = 51; _container[d+1] = 9; break;
-      case 'c' : _container[d] = 19; _container[d+1] = 8; break;
-      case 'd' : _container[d] = 19; _container[d+1] = 11; break;
-      case 'e' : _container[d] = 27; _container[d+1] = 0; break;
-      case 'f' : _container[d] = 50; _container[d+1] = 128; break; //F
-      case 'g' : _container[d] = 1; _container[d+1] = 41; break; //g :)
-      case 'h' : _container[d] = 50; _container[d+1] = 9; break;
-      case 'i' : _container[d] = 20; _container[d+1] = 0; break;
-      case 'j' : _container[d] = 17; _container[d+1] = 3; break; //J
-      case 'k' : _container[d] = 50; _container[d+1] = 48; break; //K
-      case 'l' : _container[d] = 48; _container[d+1] = 0; break;
-      case 'm' : _container[d] = 52; _container[d+1] = 19; break; //M
-      case 'n' : _container[d] = 18; _container[d+1] = 9; break;
-      case 'o' : _container[d] = 19; _container[d+1] = 9; break;
-      case 'p' : _container[d] = 50; _container[d+1] = 138; break; //P
-      case 'q' : _container[d] = 49; _container[d+1] = 163; break; //Q
-      case 'r' : _container[d] = 18; _container[d+1] = 0; break;
-      case 's' : _container[d] = 1; _container[d+1] = 40; break;
-      case 't' : _container[d] = 2; _container[d+1] = 72; break; //+
-      case 'u' : _container[d] = 17; _container[d+1] = 1; break;
-      case 'v' : _container[d] = 24; _container[d+1] = 0; break;
-      case 'w' : _container[d] = 24; _container[d+1] = 33; break;
-      case 'x' : _container[d] = 12; _container[d+1] = 48; break; //X
-      case 'y' : _container[d] = 1; _container[d+1] = 33; break;
-      case 'z' : _container[d] = 11; _container[d+1] = 0; break;
-      //case 199 : _container[d] = 42; _container[d+1] = 136; break; //Ç
-      //case 286 : _container[d] = 49; _container[d+1] = 137; break; //Ğ
-      //case 304 : _container[d] = 0; _container[d+1] = 66; break; // İ
-      //case 214 : _container[d] = 23; _container[d+1] = 25; break; //Ö
-      //case 214 : _container[d] = 53; _container[d+1] = 147; break; //Ö büyük
-      //case 350 : _container[d] = 5; _container[d+1] = 137; break; //Ş
-      //case 220 : _container[d] = 21; _container[d+1] = 17; break; //Ü
-      //case 220 : _container[d] = 53; _container[d+1] = 19; break; //Ü büyük
-      //case 231 : _container[d] = 19; _container[d+1] = 8; break; //c
-      //case 287 : _container[d] = 1; _container[d+1] = 169; break; //ğ
-      //case 305 : _container[d] = 16; _container[d+1] = 0; break; 
-      //case 246 : _container[d] = 23; _container[d+1] = 25; break; //ö
-      //case 351 : _container[d] = 5; _container[d+1] = 137; break; //Ş
-      //case 252 : _container[d] = 21; _container[d+1] = 17; break; //Ü
-      default : d -= 2; break;  //Tanınmayan karakterlerin alanı boş kalmasın...
-      }
-      d += 2;
   }
 }
