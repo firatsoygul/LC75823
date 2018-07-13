@@ -314,7 +314,7 @@ Ekranda o anda yazılı olan karakterleri siler. Metinler arası geçişlerde ku
 
 ### void reset()
 
-`clear()` fonksiyonuna ek olarak, `textLoopCount()` ile tutulan metin döngü sayısını, ekrandaki tüm sembolleri, sol ve sağ seviye bilgilerini sıfırlar. Animasyon hızını başlangıç değeri olan 300 milisaniyeye ayarlar. Ekran güç tasarrufu (power saving) modunda ise açılacaktır. Ancak `volumeStartValue()` ve `volumeEndValue()` ile belirlenen seviye aralıklarını **DEĞİŞTİRMEZ**.
+`clear()` fonksiyonuna ek olarak, `textLoopCount()` ile tutulan metin döngü sayısını, ekrandaki tüm sembolleri, sol ve sağ seviye bilgilerini sıfırlar. Animasyon hızını başlangıç değeri olan 300 milisaniyeye ayarlar. Ekran güç tasarrufu (power saving) modunda ise açılacaktır. Ancak `volumeStartValue()` ve `volumeEndValue()` ile belirlenen seviye aralıklarını **değiştirmez**.
 
 ### void noDisplay()
 
