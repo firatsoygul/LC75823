@@ -1,0 +1,5 @@
+src/utf8ascii.h
+src/utf8ascii.cpp
+.vscode
+examples/.vscode
+.git
