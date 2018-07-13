@@ -2,22 +2,13 @@
 
 LC75823 lcd;
 
-char *f = "ÇÇSOYGÜL FIRAT";
-
-void setup() {
-
-lcd.begin(10,130);
-Serial.begin(9600);
+void setup()
+{
+    lcd.begin(10, 130); //SlaveSelect pin, chip address.
+    lcd.speed(250); // Animation speed.
 }
 
-void loop() {
-
-    //utf8ascii(f);
-    lcd.speed(150);
-
-    lcd.clear();
-    lcd.sText(f);
-    lcd.symbol(CLAS, 1);
-    lcd.symbol(X_BASS, 1);
-    lcd.volumeLeftLevel(4);
+void loop()
+{
+    lcd.sText("LC75823 LIBRARY FOR ARDUINO."); // Text scrolling.
 }

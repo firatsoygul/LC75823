@@ -2,32 +2,49 @@
 
 LC75823 lcd;
 
-  char ss1[50] ="########";
-  char ss2[50] ="ABCDEFGHIJKLMNOPRSTUVYZ";
-  char ss3[50] ="0123456789";
-  
-void setup() {
+char full[9] = "########";
+char alphabet[27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+char number[11] = "0123456789";
 
-Serial.begin(9600);
-lcd.begin(10,130);
-}
+void setup() { lcd.begin(10, 130); }
 
-void loop() {
-  
+void loop()
+{
+  lcd.reset();
+  lcd.clear();
+  boolean sts = true;
+  lcd.symbol(ST, sts);
+  lcd.symbol(POP, sts);
+  lcd.symbol(CLAS, sts);
+  lcd.symbol(TEYP_ICON, sts);
+  lcd.symbol(X_BASS, sts);
+  lcd.symbol(ROCK, sts);
+  lcd.symbol(MONO, sts);
+  lcd.symbol(LOC, sts);
+  lcd.symbol(CD_ICON, sts);
+  lcd.symbol(TEYP_ICON, sts);
+  lcd.volumeLeftLevel(8);
+  lcd.volumeRightLevel(8);
+  lcd.volumeChart(16, 1);
+  lcd.volumeChart(17, 1);
+  lcd.volumeChart(18, 1);
 
+  lcd.text(full);
+  delay(1500);
 
-    boolean sts = true;
+  lcd.clear();
+  lcd.speed(100);
+  for (int i = 0; lcd.textLoopCount() < 1; i++)
+  {
+    lcd.sChart(1);
+    lcd.sText(alphabet);
+  }
 
-    lcd.symbol(ST,sts);
-    lcd.symbol(POP,sts);
-    lcd.symbol(CLAS,sts);
-    lcd.symbol(TEYP_ICON,sts);
-    lcd.symbol(X_BASS,sts);
-    lcd.symbol(ROCK,sts);
-    lcd.symbol(MONO,sts);
-    lcd.symbol(LOC,sts);
-    lcd.symbol(CD_ICON,sts);
-    lcd.symbol(TEYP_ICON,sts);
-
-
+  lcd.clear();
+  lcd.speed(150);
+  for (int i = 0; lcd.textLoopCount() < 1; i++)
+  {
+    lcd.sChart(1);
+    lcd.sText(number);
+  }
 }

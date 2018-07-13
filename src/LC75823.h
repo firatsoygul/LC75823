@@ -42,22 +42,22 @@ enum Symbol {
 class LC75823 {
 public:
   LC75823();
-  void begin(int chipEnabledPin, int address);
-  void display();
-  void noDisplay();
-  void text(char text[]);
-  void sChart(boolean chartValue);
-  void sText(char text[]);
-  void speed(int textSpeed);
-  int textLoopCount();
-  void symbol(enum Symbol symbolName, boolean status);
-  void volumeChart(int volumeChartNo, boolean status);
-  void volumeStartValue(int startValue);
-  void volumeEndValue(int endValue);
-  void volumeLeftLevel(int levelValue);
-  void volumeRightLevel(int levelValue);
-  void clear();
-  void reset();
+  *void begin(int chipEnabledPin, int address);
+  *void text(char text[]);
+  *void sChart(boolean chartValue);
+  *void sText(char text[]);
+  *int textLoopCount();
+  *void symbol(enum Symbol symbolName, boolean status);
+  *void volumeChart(int volumeChartNo, boolean status);
+  *void volumeStartValue(int startValue);
+  *void volumeEndValue(int endValue);
+  *void volumeLeftLevel(int levelValue);
+  *void volumeRightLevel(int levelValue);
+  *void speed(int textSpeed);
+  *void display();
+  *void noDisplay();
+  *void clear();
+  *void reset();
 
 private:
   int _volumeLeftLevel = 0;
@@ -108,9 +108,9 @@ private:
   // boolean _iconVolumeRight6 = false;
   // boolean _iconVolumeRight7 = false;
   // boolean _iconVolumeRight8 = false;
-  byte _symbols[5];         // 5 SPI byte package for symbol data
+  byte _symbols[6];         // 5 SPI byte package for symbol data
   byte _bellekTasmasi1[10]; // Bellek taşmasına geçici çözüm.
-  byte _screen[15];         // 15 SPI byte package for character data
+  byte _screen[16];         // 15 SPI byte package for character data
   byte _bellekTasmasi2[10]; // Bellek taşmasına geçici çözüm. leftBased()
                             // metodundaki for dönüsünün ikinci if sorgusunda
                             // bulunan -1 lik sağa öteleme düzeltildikten sonra

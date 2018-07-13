@@ -60,6 +60,7 @@ void LC75823::speed(int textSpeed) { _textSpeed = textSpeed; }
  */
 void LC75823::clear() {
   memset(_container, 0, _containerSize);
+  memset(_screen, 0, 15);
   // memset(_symbol, 0, 4); // Sembolleri silmek için.
   _sScroll = 0;
   _loopNumber = 0;
@@ -74,11 +75,18 @@ void LC75823::clear() {
  * Output : None
  */
 void LC75823::reset() {
-  memset(_screen, 0, _containerSize);
+  memset(_screen, 0, 15);
   memset(_container, 0, _containerSize);
-  memset(_symbols, 0, 4);
+  memset(_symbols, 0, 5);
+  _iconSt = false;
+  _iconRock = false;
   _sScroll = 0;
+  _tScroll = 0;
   _loopNumber = 0;
+  _textLenght = 0;
+  _textSpeed = 300;
+  _volumeLeftLevel = 0;
+  _volumeRightLevel = 0;
   _print(_address, _screen, _symbols);
 }
 
@@ -214,8 +222,16 @@ void LC75823::_textLoop() {
  */
 void LC75823::text(char text[]) {
   _textSize(text);
-  _letters(text);
+    char _screenText[8];
+  for (int i = 0; i < 8; i++) {
+    _screenText[i] = text[i];
+    if (i >= _textLenght) {
+      _screenText[i] = ' ';
+    }
+  }
+  _letters(_screenText);
   _setLetters();
+  _setSymbols();
   _print(_address, _screen, _symbols);
 }
 
@@ -229,7 +245,7 @@ void LC75823::sText(char text[]) {
   _textSize(text);
   char _screenText[8];
   for (int i = 0; i < 8; i++) {
-    int c = text[i + _tScroll] - 32;
+    //int c = text[i + _tScroll] - 32;
     _screenText[i] = text[i + _tScroll];
     if ((i + _tScroll) >= _textLenght) {
       _screenText[i] = ' ';
@@ -498,7 +514,6 @@ void LC75823::volumeChart(int volumeChartNo, boolean status) {
  */
 void LC75823::_letters(char gk[]) {
   int d = 0;
-  int bos = 0;
   for (int i = 0; i < 8; i++) {
     int c = gk[i] - 32;
     if (c >= 0 && c <= 94) {
