@@ -9,7 +9,7 @@ Arduino için LC75823 lcd sürücü kütüphanesi.
 ## KURULUM
 
 - Arduino taslak klasörünüzde bulunan `libraries/` klasörünün altında `LC75823` adında yeni bir klasör oluşturun(libraries klasörü henüz mevcut değilse siz oluşturun).
-- Kütüphane dosyaları içinde bulunan `src` ve `example` klasörlerini, yeni oluşturduğunuz `LC75823` klasörüne yerleştirin.
+- Kütüphane dosyaları içinde bulunan `src/` ve `example/` klasörlerini, yeni oluşturduğunuz `LC75823` klasörüne yerleştirin.
 
 Not: Arduino taslak klasörü, işletim sisteminize bağlı olarak aşağıdaki konumlarda bulunur(eğer değiştirmediyseniz).
 
