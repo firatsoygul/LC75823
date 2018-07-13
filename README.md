@@ -2,7 +2,7 @@
 
 Arduino için LC75823 lcd sürücü kütüphanesi.
 
-> Bu kütüphaneyi oluştururken, eski bir araba kasetçalarının ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım kartın aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd kartı, tamamen kendine özel alanlar içerebilir. Aynı bendeki kartta olduğu gibi. Ancak LC75823 entegresi ile birebir uyumlu olduğundan, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, bu sürücü ile tasarlanmış diğer lcd ekranlar için de kullanılabilirsiniz.
+_Bu kütüphaneyi oluştururken, eski bir araba kasetçalarının ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerebilir. Aynı bendeki panelde olduğu gibi. Ancak LC75823 entegresi ile birebir uyumlu olduğundan, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, bu sürücü ile tasarlanmış diğer lcd paneller için de kullanılabilirsiniz._
 
 ![image_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/alphabet.jpg?raw=true)
 
@@ -29,13 +29,13 @@ Bu kütüphane SPI bağlantısı için standart Arduino SPI kütüphanesini kull
 - CLK'yı ise Arduino 13 nolu pine (veya ICSP soketi üzerindeki 3 nolu SCK pinine),
 - FCE girişini Arduino 10 nolu pine bağlamak gerekiyor.
 
-Bu pinler Arduino Uno modeli için geçerli. Diğer Arduino modelleri için [bu sayfadaki tabloya](https://www.arduino.cc/en/Reference/SPI) bakabilirsiniz. FCE girişini ise bütün modellerde Arduino 10 nolu pine bağlıyoruz. Veya `begin(<SlaveSelect pin>, <adres>)` metodundaki parametreyi başka bir pine ayarlayabilirsiniz. Bağlantı şeması görseldeki gibi olmalıdır.
+Bu pinler Arduino Uno modeli için geçerli. Diğer Arduino modelleri için [bu sayfadaki tabloya](https://www.arduino.cc/en/Reference/SPI) bakabilirsiniz. FCE girişini ise bütün modellerde Arduino 10 nolu pine bağlıyoruz. Veya `begin(<SlaveSelect pin>, <adres>)` fonksiyonundaki parametreyi başka bir pine ayarlayabilirsiniz. Bağlantı şeması görseldeki gibi olmalıdır.
 
 ![image_2](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/baglanti.jpg?raw=true)
 
 ## KULLANIMI
 
-Kütüphaneyi kendi projenizde kullanbilmek için, Arduino IDE menüsünde `Taslak > library ekle > LC75823` yolunu takip edebilirsiniz. Veya kendiniz .ino dosyanızın en üstüne aşağıdaki kodu ekleyin.
+Kütüphaneyi kendi projenizde kullanabilmek için, Arduino IDE menüsünde `Taslak > library ekle > LC75823` yolunu takip edebilirsiniz. Veya kendiniz .ino dosyanızın en üstüne aşağıdaki kodu ekleyin.
 
 ```C++
 #include <LC75823.h>
@@ -49,7 +49,7 @@ LC75823 lcd;
 
 ### void begin(int chipEnabledPin, int address)
 
-Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI bağlantı adresinin parametre olarak girilmesi gerekiyor.Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI metodlarını içerir ve chip enable pini `OUT` durumuna getirir. Bu işlemlerin ekranda yazdırma yapılmadan önce başlatılması gerektiği için, genellikle Arduino `setup()` içinde tanımlanması daha uygundur.
+Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI adresinin parametre olarak girilmesi gerekiyor. Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI fonksiyonlarını içerir ve chip enable pinini `OUT` durumuna getirir. Bu işlemlerin ekrana yazdırma yapılmadan önce başlatılması gerektiği için, genellikle Arduino `setup()` içinde tanımlanması daha uygundur.
 
 ```C++
 void setup()
@@ -60,9 +60,9 @@ void setup()
 
 ### void text(char text[])
 
-Girilen metni sabit biçimde ekrana yazdıran metotdur. Yazdırılacak metin char türünde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Ekran 8 karakteri desteklediği için, girilen metnin ilk 8 karakteri ekranda görünür.
+Girilen metni sabit biçimde ekrana yazdırır. Yazdırılacak metin `char` türünde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Ekran aynı anda 8 karakteri gösterebildiği için, girilen metnin ilk 8 karakteri ekranda görünür.
 
-> Kütüphane yalnızca Standart ASCII tablosundaki 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
+> Kütüphane yalnızca [ASCII karakter tablosundaki](https://www.arduino.cc/en/Reference/ASCIIchart) 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
 
 ```C++
 void loop()
@@ -78,8 +78,9 @@ void loop()
 
 ### void sText(char text[])
 
-Girilen metni ekran üzerinde sağdan sola doğru kaydırarak yazdırır. Yazdırılacak metin char türünde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Bu yazım şeklinde ekranda gösterilen metnin bir karakter sayı sınırı bulunmaz.
-> Kütüphane yalnızca Standart ASCII tablosundaki 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
+Girilen metni ekran üzerinde sağdan sola doğru kaydırarak yazdırır. Yazdırılacak metin `char` tipinde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Bu yazım şeklinde ekranda gösterilen metnin bir karakter sayı sınırı bulunmaz.
+
+> Kütüphane yalnızca [ASCII karakter tablosundaki](https://www.arduino.cc/en/Reference/ASCIIchart) 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
 
 ```C++
 void loop()
@@ -93,9 +94,9 @@ void loop()
 }
 ```
 
-> Metni taşıyan `char` dizisi tanımlanırken, dizisinin eleman sayısı metnin karakter sayısından 1 fazla olmalıdır. Eğer 12 harfli bir metin giriyorsanız, diziyi 13 elemanlı oluşturmalısınız. Böylece son alana `/0` karakteri otomatik olarak yerleştirilir. Aksi halde, sonlandırma elemanı olmayan bir dizi ekrana yazdırılırken, kendisinden sonra tanımlanmış ya da bellekte kendisinden sonraki adreslerde bulunan alakasız veriler de ekrana yazdırılır.
+> Metni taşıyan `char` dizisi tanımlanırken, dizisinin eleman sayısı metnin karakter sayısından 1 fazla olmalıdır. Eğer 12 harfli bir metin giriyorsanız, diziyi 13 elemanlı oluşturmalısınız. Böylece dizinin son elemanına `/0` karakteri otomatik olarak yerleştirilir. Aksi halde, sonlandırma elemanı olmayan bir dizi ekrana yazdırılırken, kendisinden sonra tanımlanmış ya da bellekte kendisinden sonraki adreslerde bulunan alakasız veriler de ekrana yazdırılır.
 
-Bazı durumlarda, içinde `char`, `int` gibi farklı türden veriyi aynı anda ekrana yazdırmanız gerekebilir. Böylesi durumlarda, `C++` fonksiyonlarından [sprintf()'i](http://www.cplusplus.com/reference/cstdio/sprintf/) kullanabilirsiniz. Aşağıdaki örnekte, bir `int` değişkenin değeri ile bazı `char` karakterler birleştirilerek, lcd nesnesinin `sText()` metoduna parametre olarak giriliyor.
+Bazı durumlarda, `char`, `int` gibi farklı veri tiplerinden oluşan birden fazla veriyi, aynı anda ekrana yazdırmanız gerekebilir. Böylesi durumlarda, `C++` fonksiyonlarından [sprintf()](http://www.cplusplus.com/reference/cstdio/sprintf/)'i kullanabilirsiniz. Aşağıdaki örnekte, bir `int` değişkenin değeri ile bazı `char` karakterler birleştirilerek, lcd nesnesinin `sText()` fonksiyonuna parametre olarak giriliyor.
 
 ```C++
 void loop()
@@ -108,7 +109,7 @@ void loop()
 }
 ```
 
-`Sprintf()` metodu `int` türünü desteklerken, `float` türündeki değişkenlerde işlem görmüyor. Bu durumu aşmak için de `dtostrf()` fonksiyonu kullanılabilir. Aşağıda, bir `float` değişkenin değeri, `dtostrf()` fonksiyonu ile başka bir `char` dizisine aktarılıyor. Bir sonraki adımda ise `sprintf()` fonksiyonunda başka bir char dizisiyle birleştiriliyor. Ve son olarak `sText()` metodu ile ekrana yazdırılıyor.
+`Sprintf()` fonksiyonu `int` veri tipini desteklerken, `float` tipindeki değişkenleri desteklemiyor. Bu durumu aşmak için `dtostrf()` fonksiyonunu kullanabilirsiniz. Aşağıda, bir `float` değişkenin değeri, `dtostrf()` fonksiyonu ile başka bir `char` dizisine aktarılıyor. Bir sonraki adımda ise `sprintf()` fonksiyonunda başka bir `char` dizisiyle birleştiriliyor. Ve son olarak `sText()` fonksiyonu ile ekrana yazdırılıyor.
 
 ```C++
 void loop()
@@ -323,6 +324,6 @@ Sürücü güç tasarrufu (power saving) moduna geçer. Sürücü içindeki osil
 
 Güç tasarrufu (power saving) modunda bulunan sürücüyü normal çalışma moduna geçirir.
 
-![image_4](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/full.jpg?raw=true)
+![image_4](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/full.JPG?raw=true)
 
 ![image_5](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/IMG_0104.JPG?raw=true)

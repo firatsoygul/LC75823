@@ -1,4 +1,6 @@
 src/utf8ascii.h
 src/utf8ascii.cpp
-.vscode
+.vscode/
+examples/.vscode
 .git
+.gitignore
