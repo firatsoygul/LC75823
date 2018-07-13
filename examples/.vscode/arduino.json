@@ -1,5 +1,0 @@
-{
-    "port": "/dev/ttyUSB0",
-    "board": "arduino:avr:uno",
-    "sketch": "LC75823_basic/LC75823_basic.ino"
-}
