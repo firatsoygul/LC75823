@@ -127,11 +127,11 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### int textLoopCount()
 
-`sText()` fonksiyonu ile soldan sağa kaydırılarak ekrana yazdırılan metnin, ekranda kaç defa döndüğü bilgisini `int` tipinde dışa  döndürür. Bir mesajın görünürlüğünü, ekranda belirli sayıda tekrarladıktan sonra sonlandırmak istiyorsanız, bu fonksiyondan dönen değere göre işlem yapabilirsiniz. Aşağıdaki örnekte girilen metin, 3 defa ekranda döndükten sonra döngüden çıkılır ve bir sonraki
+`sText()` fonksiyonu ile soldan sağa kaydırılarak ekrana yazdırılan metnin, ekranda kaç defa döndüğü bilgisini `int` tipinde dışa  döndürür. Bir metnin görünürlüğünü, ekranda belirli sayıda tekrarladıktan sonra sonlandırmak istiyorsanız, bu fonksiyondan dönen değere göre işlem yapabilirsiniz. Aşağıdaki örnekte, girilen metin 3 defa ekranda döndükten sonra döngüden çıkılır ve bir sonraki
 işleme geçilir.
 
 ```C++
@@ -144,11 +144,11 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC58823_text/LC75823_text.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC58823_text/LC75823_text.ino)
 
 ### void symbol(enum Symbol symbolName, boolean status)
 
-Bu fonksiyon ile ekran üzerinde bulunan sembol segmentlerini gösterebilir ve gizleyebilirsiniz. Bu lcd kartı için ekran üzerindeki tüm sembollere karşılık gelen bir `enum` sabiti tanımlanmıştır. `Symbol` isimli bu `enum` sabitlerinden birini ve içereceği durumu (`true` veya `1` = göster,  `false` veya `0` = gizle) bu fonksiyona parametre olarak girerek, ilgili sembolün görünürlüğünü değiştirebilirsiniz.
+Bu fonksiyon ile ekran üzerinde bulunan sembolleri gösterebilir ve gizleyebilirsiniz. Lcd panel üzerindeki tüm sembollere karşılık gelen birer `enum` sabiti tanımlanmıştır. `Symbol` isimli bu `enum` sabitlerinden birini ve içereceği durumu (*`true` veya `1` = göster,  `false` veya `0` = gizle*) bu fonksiyona parametre olarak girerek, ilgili sembolün görünürlüğünü değiştirebilirsiniz.
 
 ```C++
 void loop()
@@ -168,9 +168,9 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
-Tüm `Symbol` `enum` sabitleri aşağıda verilmiştir.
+Tüm sembol sabitleri aşağıda verilmiştir.
 
 ```C++
   ST,
@@ -204,7 +204,7 @@ Tüm `Symbol` `enum` sabitleri aşağıda verilmiştir.
 
 ### void volumeChart(int volumeChartNo, boolean status)
 
-Volume seviyesi ve Chart gösterimi gibi bazı sıralı ve birbiri ile bağlantılı sembollerin kontrolü için kullanılır. `symbol()` fonksiyonuyla da müdahale edilebilen `VOLUME_*` ve `CHART_*` sembollerinin durumu bu fonksiyon ile, sıralı `int` değerler girilerek değiştirilebilir. Böylece bu sembolleri bir döngü içinde sıralı işlemlerde kullanabilirsiniz.
+'Volume seviyesi' ve 'chart' gösterimi gibi, sıralı ve birbiri ile bağlantılı bazı sembollerin kontrolü için kullanılır. `symbol()` fonksiyonuyla da müdahale edilebilen `VOLUME_*` ve `CHART_*` sembollerinin durumu, bu fonksiyon ile sıralı `int` değerler girilerek değiştirilebilir. Böylece bu sembolleri bir döngü içinde sıralı işlemlerde kullanabilirsiniz.
 
 ```C++
 void loop()
@@ -220,7 +220,7 @@ void loop()
 }
 ```
 
-Diğer volume sembollerinin `int` karşılıkları aşağıda verilmiştir.
+Volume sembollerinin fonksiyon içindeki sıralaması aşağıda verilmiştir.
 
 ```C++
    1: VOLUME_1
@@ -248,7 +248,7 @@ Diğer volume sembollerinin `int` karşılıkları aşağıda verilmiştir.
 
 ### void volumeLeftLevel(int levelValue), void volumeRightLevel(int levelValue)
 
-Volume seviye sembollerini istenen seviyeye getirir. 1 nolu sembol ortak olmak üzere, birbirinden ayrı sol ve sağ yedişer, toplamda 15 bağımsız volume sembolü bulunuyor. Bu seviye sembollerini döngüye girmeden bir anda istenilen seviyeye getirmek için kullanılır. Örneğin sol seviyeyi 5. düzeye getirmek için `volumeLeftLevel(5)`, sağ seviyeyi 3. düzeye getirmek için de `volumeRightLevel(3)` komutunu kullanmak yeterli.
+Volume seviyesini istenen konuma getirir. 1 nolu sembol ortak olmak üzere, birbirinden ayrı sol ve sağ yedişer, toplamda 15 bağımsız volume sembolü bulunuyor. Bu seviye sembollerini döngüye girmeden bir anda istenilen seviyeye getirmek için kullanılır. Örneğin sol seviyeyi 5. düzeye getirmek için `volumeLeftLevel(5)`, sağ seviyeyi 3. düzeye getirmek için de `volumeRightLevel(3)` komutunu kullanmak yeterli.
 
 ```C++
 void loop()
@@ -258,13 +258,13 @@ void loop()
 }
 ```
 
-Seviye basamakları toplam 8 farklı segmentten oluşuyor. Varsayılan olarak en düşük seviye `0`, en yüksek seviye ise `8` kabul edilmiştir. Ancak bu değerleri `volumeStartValue()`, ve `volumeEndValue(), fonksiyonları ile düzenleyebilirsiniz.
+Seviye basamakları toplam 8 farklı segmentten oluşuyor. Varsayılan olarak en düşük seviye `0`, en yüksek seviye ise `8` kabul edilmiştir. Ancak bu değerleri `volumeStartValue()`, ve `volumeEndValue()` fonksiyonları ile düzenleyebilirsiniz.
 
 ### void volumeStartValue(int startValue), void volumeEndValue(int endValue)
 
-Seviye aralığı olarak 8 birimin yetmediği durumlarda, bu fonksiyonlar ile başlangıç ve bitiş değerleri ayarlanabilir. Örneğin aşağıdaki örnekte, Arduino `A0` nolu analog girişine uygulanan voltajın (max. 5 v.) yaklaşık değeri, seviye simgeleri üzerinde gösterilmek istenebilir. Arduino analog girişten gelen voltaj değerini 0-1023 arası bir değerle bildirmektedir. Ancak bu değer standart seviye sınırı olan sekizi aştığı için, sekizin üzerindeki her veri seviyeyi en sona taşır. Bu durumu düzeltmek için, alt ve üst seviye sınırlarımızı bu iki fonksiyonla bildirebiliyoruz.
+Seviye aralığı olarak 8 birimin yetmediği durumlarda, bu fonksiyonlar ile başlangıç ve bitiş değerleri ayarlanabilir. Örneğin aşağıdaki örnekte, Arduino `A0` nolu analog girişine uygulanan voltajın (max. 5 v.) yaklaşık değeri, seviye simgeleri üzerinde gösterilmiştir. Arduino analog girişten gelen voltaj değerini 0 - 1023 arası bir değere çevirmektedir. Ancak bu değer standart seviye sınırı olan sekizi aştığı için, sekizin üzerindeki her veri seviyeyi en sona taşır. Bu durumu düzeltmek için, alt ve üst seviye sınırlarımızı bu iki fonksiyonla bildirebiliyoruz.
 
-Program boyunca bu ayarı değiştirme ihtiyacı duyulmuyorsa, `setup()` fonksiyonu içinde tanımlayabilirsiniz.
+Program boyunca bu ayarı değiştirme ihtiyacı duyulmuyorsa, `setup()` fonksiyonu içinde tanımlayınız.
 
 ```C++
 void setup()
@@ -286,11 +286,11 @@ void loop()
 
 ![image_3](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/volt.jpg?raw=true)
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### void sChart(boolean chartValue)
 
-Chart sembollerinin, dönme animasyonu için kullanılır. Fonksiyona `true` veya `1` değeri girildiğinde, içinde bulunduğu döngüye bağlı olarak dönüş animasyonu başlatır.
+Chart sembollerinin, dönme animasyonu için kullanılır. Fonksiyona `true` veya `1` değeri girildiği sürece, chart sembolleri üzerinde dönüş animasyonu oluşturur.
 
 ```C++
 void loop()
@@ -302,15 +302,15 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
 ### void speed(int textSpeed)
 
-Ekrandaki animasyonların (metin kaydırma, seviye geçişleri, chart animasyonu vb.) hızını belirlemek için kullanılır. Uygulamnın herhangi bir noktasında kullanılabilir. `int` tipindeki parametre milisaniye cinsinden olmalıdır. Belirtilen süre animasyonun geçiş hızını belirler. Dolayısıyla süre ne kadar az ise, animasyonlar o kadar hızlı gösterilir. Hiç bir değer belirtilmemişse, varsayılan değer 300 milisaniye olarak uygulanır.
+Ekrandaki animasyonların (metin kaydırma, seviye geçişleri, chart animasyonu vb.) hızını belirlemek için kullanılır. Uygulamanın herhangi bir noktasında kullanılabilir. `int` tipindeki parametre milisaniye cinsinden olmalıdır. Belirtilen süre animasyonun geçiş hızını belirler. Dolayısıyla süre ne kadar az ise, animasyonlar o kadar hızlı gösterilir. Hiç bir değer belirtilmemişse, varsayılan değer 300 milisaniye olarak uygulanır.
 
 ### void clear()
 
-Ekranda o anda yazılı olan karakterleri siler. Metinler arası geçişlerde kullanıldığında, metinlerin iç içe geçme riskini engeller. Her yeni meyni ekrana yazdırmadan önce kullanmanız gerekiyor.
+Ekranda o anda yazılı olan karakterleri siler. Metinler arası geçişlerde kullanıldığında, metinlerin iç içe geçme riskini engeller. Her yeni metni ekrana yazdırmadan önce kullanmanız gerekiyor.
 
 ### void reset()
 
