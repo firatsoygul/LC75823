@@ -127,7 +127,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
 
 ### int textLoopCount()
 
@@ -144,7 +144,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC58823_text/LC75823_text.ino`](LC75823/examples/LC58823_text/LC75823_text.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC58823_text/LC75823_text.ino) dosyasında bulabilirsiniz.
 
 ### void symbol(enum Symbol symbolName, boolean status)
 
@@ -168,7 +168,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](LC75823/examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
 
 Tüm `Symbol` `enum` sabitleri aşağıda verilmiştir.
 
@@ -286,7 +286,7 @@ void loop()
 
 ![image_3](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/volt.jpg?raw=true)
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
 
 ### void sChart(boolean chartValue)
 
@@ -302,7 +302,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](LC75823/examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
 
 ### void speed(int textSpeed)
 
