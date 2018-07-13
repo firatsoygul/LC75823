@@ -9,9 +9,9 @@ Arduino için LC75823 lcd sürücü kütüphanesi.
 ## KURULUM
 
 - Arduino taslak klasörünüzde bulunan `libraries/` klasörünün altında `LC75823` adında yeni bir klasör oluşturun(libraries klasörü henüz mevcut değilse siz oluşturun).
-- Kütüphane dosyaları içinde bulunan `src/` ve `example/` klasörlerini, yeni oluşturduğunuz `LC75823` klasörüne yerleştirin.
+- Kütüphane dosyaları içinde bulunan `src/` ve `example/` klasörlerini, yeni oluşturduğunuz `LC75823/` klasörüne yerleştirin.
 
-Not: Arduino taslak klasörü, işletim sisteminize bağlı olarak aşağıdaki konumlarda bulunur(eğer değiştirmediyseniz).
+Arduino taslak klasörü, işletim sisteminize bağlı olarak aşağıdaki konumlarda bulunur(eğer değiştirmediyseniz).
 
 - Linux için: `/home/<username>/Arduino/` veya `/home/<username>/sketchbook/`
 - Windows için: `C:\Users\<username>\My Documents\arduino\`
@@ -27,21 +27,21 @@ Bu kütüphane SPI bağlantısı için standart Arduino SPI kütüphanesini kull
 
 - Data hattını Arduino 11 nolu pine (veya ICSP soketi üzerindeki 4 nolu MOSI pinine),
 - CLK'yı ise Arduino 13 nolu pine (veya ICSP soketi üzerindeki 3 nolu SCK pinine),
-- FCE girişini Arduino 10 nolu pine bağlamak gerekiyor.
+- FCE (ChipEnabled, SlaveSelect) girişini Arduino 10 nolu pine bağlamak gerekiyor.
 
-Bu pinler Arduino Uno modeli için geçerli. Diğer Arduino modelleri için [bu sayfadaki tabloya](https://www.arduino.cc/en/Reference/SPI) bakabilirsiniz. FCE girişini ise bütün modellerde Arduino 10 nolu pine bağlıyoruz. Veya `begin(<SlaveSelect pin>, <adres>)` fonksiyonundaki parametreyi başka bir pine ayarlayabilirsiniz. Bağlantı şeması görseldeki gibi olmalıdır.
+Bu pinler Arduino Uno modeli için geçerli. Diğer Arduino modelleri için [bu sayfadaki tabloya](https://www.arduino.cc/en/Reference/SPI) bakabilirsiniz. FCE (ChipEnabled, SlaveSelect) girişini ise bütün modellerde Arduino 10 nolu pine bağlıyoruz. Veya `begin(<SlaveSelect pin>, <adres>)` fonksiyonundaki parametreyi başka bir pine ayarlayabilirsiniz. Bağlantı şeması görseldeki gibi olmalıdır.
 
 ![image_2](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/baglanti.jpg?raw=true)
 
 ## KULLANIMI
 
-Kütüphaneyi kendi projenizde kullanabilmek için, Arduino IDE menüsünde `Taslak > library ekle > LC75823` yolunu takip edebilirsiniz. Veya kendiniz .ino dosyanızın en üstüne aşağıdaki kodu ekleyin.
+Kütüphaneyi kendi projenizde kullanabilmek için, Arduino IDE menüsünde `Taslak > library ekle > LC75823` yolunu takip edebilirsiniz. Veya kendiniz `.ino` dosyanızın en üstüne aşağıdaki kodu ekleyin.
 
 ```C++
 #include <LC75823.h>
 ```
 
-Kütüphaneyi bu şekilde çalışmaya dahil ettikten sonra, kütüphanedeki `LC75823` sınıfından bir nesne üretilmesi gerekiyor.
+Kütüphaneyi bu şekilde çalışmaya dahil ettikten sonra, kütüphanedeki `LC75823` sınıfından yeni bir nesne üretmeniz gerekiyor.
 
 ```C++
 LC75823 lcd;
@@ -49,7 +49,7 @@ LC75823 lcd;
 
 ### void begin(int chipEnabledPin, int address)
 
-Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI adresinin parametre olarak girilmesi gerekiyor. Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI fonksiyonlarını içerir ve chip enable pinini `OUT` durumuna getirir. Bu işlemlerin ekrana yazdırma yapılmadan önce başlatılması gerektiği için, genellikle Arduino `setup()` içinde tanımlanması daha uygundur.
+Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI adresinin parametre olarak girilmesi gerekiyor. Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI fonksiyonlarını içerir ve chip enable pinini `OUT` durumuna getirir. Bu işlemlerin ekrana yazdırma yapılmadan önce başlatılması gerektiği için, Arduino `setup()` fonksiyonu içinde tanımlanması gerekiyor.
 
 ```C++
 void setup()
