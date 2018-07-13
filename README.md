@@ -2,7 +2,7 @@
 
 Arduino için LC75823 lcd sürücü kütüphanesi.
 
-_Bu kütüphaneyi oluştururken, eski bir araba kasetçalarının ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerebilir. Aynı bendeki panelde olduğu gibi. Ancak LC75823 entegresi ile birebir uyumlu olduğundan, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, bu sürücü ile tasarlanmış diğer lcd paneller için de kullanılabilirsiniz._
+> Bu kütüphaneyi oluştururken, eski bir araba kasetçalarının ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerebilir. Aynı bendeki panelde olduğu gibi. Ancak LC75823 entegresi ile birebir uyumlu olduğundan, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, bu sürücü ile tasarlanmış diğer lcd paneller için de kullanılabilirsiniz.
 
 ![image_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/alphabet.jpg?raw=true)
 
@@ -127,7 +127,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, `examples/LC75823_voltage_level/LC75823_voltage_level.ino` dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
 
 ### int textLoopCount()
 
@@ -144,7 +144,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, `examples/LC75823_text/LC75823_text.ino` dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC58823_text/LC75823_text.ino`](LC75823/examples/LC58823_text/LC75823_text.ino) dosyasında bulabilirsiniz.
 
 ### void symbol(enum Symbol symbolName, boolean status)
 
@@ -168,7 +168,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, `examples/LC75823_symbols/LC75823_symbols.ino` dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](LC75823/examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
 
 Tüm `Symbol` `enum` sabitleri aşağıda verilmiştir.
 
@@ -286,7 +286,7 @@ void loop()
 
 ![image_3](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/volt.jpg?raw=true)
 
-> Yukarıdaki örnek kodun çalışan halini, `examples/LC75823_voltage_level/LC75823_voltage_level.ino` dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino) dosyasında bulabilirsiniz.
 
 ### void sChart(boolean chartValue)
 
@@ -302,7 +302,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodun çalışan halini, `examples/LC75823_symbols/LC75823_symbols.ino` dosyasında bulabilirsiniz.
+> Yukarıdaki örnek kodun çalışan halini, [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](LC75823/examples/LC75823_symbols/LC75823_symbols.ino) dosyasında bulabilirsiniz.
 
 ### void speed(int textSpeed)
 
