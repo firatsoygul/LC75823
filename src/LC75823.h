@@ -42,22 +42,22 @@ enum Symbol {
 class LC75823 {
 public:
   LC75823();
-  *void begin(int chipEnabledPin, int address);
-  *void text(char text[]);
-  *void sChart(boolean chartValue);
-  *void sText(char text[]);
-  *int textLoopCount();
-  *void symbol(enum Symbol symbolName, boolean status);
-  *void volumeChart(int volumeChartNo, boolean status);
-  *void volumeStartValue(int startValue);
-  *void volumeEndValue(int endValue);
-  *void volumeLeftLevel(int levelValue);
-  *void volumeRightLevel(int levelValue);
-  *void speed(int textSpeed);
-  *void display();
-  *void noDisplay();
-  *void clear();
-  *void reset();
+  void begin(int chipEnabledPin, int address);
+  void text(char text[]);
+  void sChart(boolean chartValue);
+  void sText(char text[]);
+  int textLoopCount();
+  void symbol(enum Symbol symbolName, boolean status);
+  void volumeChart(int volumeChartNo, boolean status);
+  void volumeStartValue(int startValue);
+  void volumeEndValue(int endValue);
+  void volumeLeftLevel(int levelValue);
+  void volumeRightLevel(int levelValue);
+  void speed(int textSpeed);
+  void display();
+  void noDisplay();
+  void clear();
+  void reset();
 
 private:
   int _volumeLeftLevel = 0;
