@@ -47,6 +47,8 @@ Kütüphaneyi bu şekilde çalışmaya dahil ettikten sonra, kütüphanedeki `LC
 LC75823 lcd;
 ```
 
+Artık oluşturduğunuz bu yeni `lcd` nesnesi ile, aşağıdaki fonksiyonları kullanabilirsiniz.
+
 ### void begin(int chipEnabledPin, int address)
 
 Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI adresinin parametre olarak girilmesi gerekiyor. Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI fonksiyonlarını içerir ve chip enable pinini `OUT` durumuna getirir. Bu işlemlerin ekrana yazdırma yapılmadan önce başlatılması gerektiği için, Arduino `setup()` fonksiyonu içinde tanımlanması gerekiyor.
@@ -127,7 +129,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
+> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### int textLoopCount()
 
@@ -144,7 +146,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC58823_text/LC75823_text.ino)
+> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC75823_text/LC75823_text.ino)
 
 ### void symbol(enum Symbol symbolName, boolean status)
 
@@ -168,7 +170,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
+> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
 Tüm sembol sabitleri aşağıda verilmiştir.
 
@@ -262,7 +264,7 @@ Seviye basamakları toplam 8 farklı segmentten oluşuyor. Varsayılan olarak en
 
 ### void volumeStartValue(int startValue), void volumeEndValue(int endValue)
 
-Seviye aralığı olarak 8 birimin yetmediği durumlarda, bu fonksiyonlar ile başlangıç ve bitiş değerleri ayarlanabilir. Örneğin aşağıdaki örnekte, Arduino `A0` nolu analog girişine uygulanan voltajın (max. 5 v.) yaklaşık değeri, seviye simgeleri üzerinde gösterilmiştir. Arduino analog girişten gelen voltaj değerini 0 - 1023 arası bir değere çevirmektedir. Ancak bu değer standart seviye sınırı olan sekizi aştığı için, sekizin üzerindeki her veri seviyeyi en sona taşır. Bu durumu düzeltmek için, alt ve üst seviye sınırlarımızı bu iki fonksiyonla bildirebiliyoruz.
+Seviye aralığı olarak 8 birimin yetmediği durumlarda, bu fonksiyonlar ile başlangıç ve bitiş değerleri ayarlanabilir. Örneğin aşağıdaki örnekte, Arduino `A0` nolu analog pinine uygulanan voltajın (max. 5 v.) yaklaşık değeri, seviye simgeleri üzerinde gösterilmiştir. Arduino analog girişten gelen voltaj değerini 0 - 1023 arası bir değere çevirmektedir. Ancak bu değer standart seviye sınırı olan sekizi aştığı için, sekizin üzerindeki her veri, seviyeyi en sona taşır. Bu durumu düzeltmek için, alt ve üst seviye sınırlarını bu iki fonksiyonla bildirebilirsiniz.
 
 Program boyunca bu ayarı değiştirme ihtiyacı duyulmuyorsa, `setup()` fonksiyonu içinde tanımlayınız.
 
@@ -286,7 +288,7 @@ void loop()
 
 ![image_3](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/volt.jpg?raw=true)
 
-> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
+> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### void sChart(boolean chartValue)
 
@@ -302,7 +304,7 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren, çalıştırılabilir .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
+> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
 ### void speed(int textSpeed)
 
