@@ -2,9 +2,13 @@
 
 Arduino için LC75823 lcd sürücü kütüphanesi.
 
-> Bu kütüphaneyi oluştururken, eski bir araba kasetçalarının ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerebilir. Aynı bendeki panelde olduğu gibi. Ancak LC75823 entegresi ile birebir uyumlu olduğundan, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, bu sürücü ile tasarlanmış diğer lcd paneller için de kullanılabilirsiniz.
+Bu kütüphaneyi aynı zamanda CT6523, PT6523, LC75823, SC6523, RSM6523, LF6523, HXJ6523, LP75823, SL4816, SWE75823, ZL75823, TM75823, SJ75823, CS1685, ADS75823, AX75823, CS75823, LS75823, PM1725, PS75823, SC75823 sürücülerinde de kullanabilirsiniz.
 
-![image_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/alphabet.jpg?raw=true)
+> Bu kütüphaneyi oluştururken, eski bir kaset çaların ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerecektir. Ancak yukarıdaki sürücülerin herhangi birini içerdiği sürece, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, diğer lcd paneller için de kullanılabilirsiniz. Örnek olarak PT6523 sürücüsü kullanan başka bir lcd panel için düzenlenmiş halini, [bu sayfada](https://github.com/firatsoygul/PT6523) inceleyebilirsiniz. 
+
+![image_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/alphabet.jpg?raw=true)  
+
+![image_1a](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/2.jpg?raw=true)
 
 ## KURULUM
 
