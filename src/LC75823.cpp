@@ -52,9 +52,9 @@ void LC75823::speed(int textSpeed) { _textSpeed = textSpeed; }
 
 /*
 * Function Name: clear
- * Description : Clears the _container array, which carries the character data, the _loopNumber int variable, which holds the number of rotations of the text on the screen, and
- * Resets the _sScroll int variable that hold the animation number and prints an empty container to the screen.
- * (It only deletes characters from the screen, symbols are not deleted.)
+ * Description : Resets the _container array that carries the character data, the _loopNumber int variable that holds the number of rotations of the text on the screen
+ *               and the _sScroll int variables that hold the animation number, and prints an empty container on the screen.
+ *               (It only removes characters from the screen, symbols are not.)
  * Input : None
  * Output : None
  */
@@ -156,8 +156,8 @@ void LC75823::volumeLeftLevel(int levelValue) {
 
 /*
 * Function Name: volumeRightLevel
- * Description : Determines the value of right lcd volume indicators. The range of values can be specified with the volumeStartValue and volumeEndValue methods.
- * Input : int levelValue (Right volume level value).
+ * Description : It determines the value of the volume indicators on the right. The range of values can be specified with the volumeStartValue and volumeEndValue methods.
+ * Input : int levelValue (Volume level value on the right).
  * Output : None
  */
 void LC75823::volumeRightLevel(int levelValue) {
@@ -265,7 +265,7 @@ void LC75823::sText(char text[]) {
 
 /*
  * Function Name: _setSymbols
- * Description : Process symbol states into the _screen byte array
+ * Description : Saves symbol states to the _screen byte array.
  * Input : None
  * Output : None
  */
@@ -273,7 +273,7 @@ void LC75823::_setSymbols() { bitWrite(_screen[0], 7, _iconSt); }
 
 /*
  * Function Name: _setLetters
- * Description : In order to make the translated data of the entered text suitable for the LCD board suitable for SPI byte data packets,
+ * Description : It performs the necessary bit shifting to make the ASCII codes of the entered text suitable for the SPI data package of the lcd driver.
  *               performs the necessary bit-shifting operations. Result is assigned to the _screen byte array.
  * Input : None
  * Output : None
@@ -306,7 +306,7 @@ void LC75823::_setLetters() {
 
 /*
  * Function Name: _print
- * Description : Use the prepared _address int variable, _screen and _symbols byte
+ * Description : Using the Arduino SPI library, it sends the _address int variable, _screen and _symbols byte strings to the driver.
  *               to send the strings to the lcd using the Arduino SPI library
  * Input : byte pScreen[] 
  * Output : None
@@ -507,7 +507,7 @@ void LC75823::volumeChart(int volumeChartNo, boolean status) {
 
 /*
  * Function Name: _letters
- * Description : Compares the ACSII equivalents of the characters in the entered text with the character14SEG two-dimensional array in the character.h 
+ * Description : Compares the ASCII equivalents of the characters in the entered text with the character14SEG two-dimensional array in the character.h 
  *               file and transfers the values to the _container byte array.
  * Input : char gk[](First 8 characters of the text entered)
  * Output : None
