@@ -23,7 +23,7 @@ The Arduino sketch folder is located in the following locations depending on you
 
 Also, when you open the `File > Preferences` window from the Arduino IDE menu, you can learn-change from the "Draft Book Location" area.
 
-After placing the files, close all opened Arduino IDEs. When you turn it back on, the IDE will automatically re-scan your libraries and add the library you just added to its list. To check this, open your Arduino IDE and search for the line `LC75823` under the `File > Examples`__???????????__ menu. When you hover over this line, you will see some examples ready to use. 
+After placing the files, close all opened Arduino IDEs. When you turn it back on, the IDE will automatically re-scan your libraries and add the library you just added to its list. To check this, open your Arduino IDE and search for the line `LC75823` under the `File > Examples` menu. When you hover over this line, you will see some examples ready to use. 
 
 ## CONNECTION 
 
@@ -39,7 +39,7 @@ These pins are valid for the Arduino Uno model. For other Arduino models please 
 
 ## USAGE
 
-In order to use the library in your own project, you can follow the path of `Draft > add library > LC75823`__??????????__ in the Arduino IDE menu. Or add the following code at the start of your `.ino` file by yourself. 
+In order to use the library in your own project, you can follow the path of `Draft > add library > LC75823` in the Arduino IDE menu. Or add the following code at the start of your `.ino` file by yourself. 
 ```C++
 #include <LC75823.h>
 ```
