@@ -1,6 +1,6 @@
-# Arduino library for LC75823
+# LC75823 lcd driver library for Arduino.
 
-LC75823 lcd driver library for Arduino.
+[Turkish.](README_tr.md)
 
 Also you can use this library with CT6523, PT6523, LC75823, SC6523, RSM6523, LF6523, HXJ6523, LP75823, SL4816, SWE75823, ZL75823, TM75823, SJ75823, CS1685, ADS75823, AX75823, CS75823, LS75823, PM1725, PS75823, SC75823.
 
@@ -136,14 +136,14 @@ void loop()
 
 ### int textLoopCount()
 
-Returns the information of how many times the text on the screen rotates by shifting from left to right with the `sText()` function, in an` int` type. If you want to stop text rotation after a certain number of rotations, you can operate according to the value returned from this function. In the example below, the loop exits after the text rotates 3 times on the screen. 
+If the sText () function is used, it returns an int type information about how many times the text is rotated on the screen. If you want to end the visibility of a text after a certain number of times on the screen, you can operate according to the value returned from this function. In the example below, after the text has rotated 3 times on the screen, it exits the loop and moves on to the next action. 
 
 ```C++
 void loop()
 {
   for (int i = 0; lcd.textLoopCount() < 3; i++)
    {
-    lcd.sText("THIS TEXT WILL FREEZE ON THE SCREEN 3 TIMES.);
+    lcd.sText("THIS TEXT WILL REPEAT ON THE SCREEN 3 TIMES.);
    }
 }
 ```
