@@ -15,9 +15,9 @@ LC75823::LC75823() {
 
 /*
 * Function Name: begin
- * Description : Sürücünün adres ve slaveSelect pin bilgilerini alır, SPI ayarını yapar ve başlatır.
- * Input : int chipEnabledPin(sürücünün slaveSelect pininin bağlı olduğu pin no), 
- *         int address(sürücünün adresi).
+ * Description : receives the SPI address and slaveSelect pin information, sets SPI settings and starts communication.
+ * Input : int chipEnabledPin(pin no to which slaveSelect pin is connected), 
+ *         int address(SPI data address).
  * Output : None
  */
 void LC75823::begin(int chipEnabledPin, int address) {
@@ -31,7 +31,7 @@ void LC75823::begin(int chipEnabledPin, int address) {
 
 /*
 * Function Name: textSize
- * Description : Lcd'ye gönderilen metnin karakter uzunluğunu hesaplar ve _textLenght global değişkenine girer. 
+ * Description : Calculates the character length of the text sent to the lcd and saves to global variable _textLenght.
  * Input : char array
  * Output : None
  */
@@ -44,7 +44,7 @@ void LC75823::_textSize(char text[]) {
 
 /*
 * Function Name: speed
- * Description : Kullanıcının lcd animasyon hızını girebilmesini sağlar.  
+ * Description : Allows to enter lcd animation speed.  
  * Input : int
  * Output : None
  */
@@ -52,16 +52,16 @@ void LC75823::speed(int textSpeed) { _textSpeed = textSpeed; }
 
 /*
 * Function Name: clear
- * Description : Karakter datalarını taşıyan _container dizisini, metnin ekrandaki dönüş sayısını tutan _loopNumber int değişkenini ve 
- *               animasyon sayısını tutan _sScroll int değişkenlerini sıfırlar ve ekrana boş bir container basar.
- *               (Sadece karakterleri ekrandan siler, semboller silinmez.)
+ * Description : Resets the _container array that carries the character data, the _loopNumber int variable that holds the number of rotations of the text on the screen
+ *               and the _sScroll int variables that hold the animation number, and prints an empty container on the screen.
+ *               (It only removes characters from the screen, symbols are not.)
  * Input : None
  * Output : None
  */
 void LC75823::clear() {
   memset(_container, 0, _containerSize);
   memset(_screen, 0, 15);
-  // memset(_symbol, 0, 4); // Sembolleri silmek için.
+  // memset(_symbol, 0, 4); // To delete symbols.
   _sScroll = 0;
   _loopNumber = 0;
   _print(_address, _screen, _symbols);
@@ -69,8 +69,8 @@ void LC75823::clear() {
 
 /*
 * Function Name: reset
- * Description : Ekrana gönderilen dataları taşıyan tüm değişkenler ve döngü değişkenleri sıfırlanır.
- *               (Karakterler ve semboller dahil.)
+ * Description : Reset all variables and arrays that carry the data sent to the screen.
+ *               (Including characters and symbols.)
  * Input : None
  * Output : None
  */
@@ -114,7 +114,7 @@ void LC75823::noDisplay() {
 
 /*
 * Function Name: volumeStartValue
- * Description : Lcd volume göstergelerine yapılacak girişin, başlangıç değerini belirler (Default = 0)
+ * Description : Sets the initial value of lcd volume indicators (Default = 0)
  * Input : int startValue
  * Output : None
  */
@@ -124,7 +124,7 @@ void LC75823::volumeStartValue(int startValue){
 
 /*
 * Function Name: volumeEndValue
- * Description : Lcd volume göstergelerine yapılacak girişin, bitiş değerini belirler. (Default = 8)
+ * Description : Sets the end value of lcd volume indicators (Default = 8)
  * Input : int endValue
  * Output : None
  */
@@ -134,8 +134,8 @@ void LC75823::volumeEndValue(int endValue){
 
 /*
 * Function Name: volumeLeftLevel
- * Description : Lcd sol volume göstergelerinin değerini belirler. Değer aralığı volumeStartValue ve volumeEndValue metodları ile belirlenebilir.
- * Input : int levelValue (Sol volume seviye değeri).
+ * Description : Determines the value of left lcd volume indicators. The range of values can be specified with the volumeStartValue and volumeEndValue methods.
+ * Input : int levelValue (Left volume level value).
  * Output : None
  */
 void LC75823::volumeLeftLevel(int levelValue) {
@@ -156,8 +156,8 @@ void LC75823::volumeLeftLevel(int levelValue) {
 
 /*
 * Function Name: volumeRightLevel
- * Description : Lcd sağ volume göstergelerinin değerini belirler. Değer aralığı volumeStartValue ve volumeEndValue metodları ile belirlenebilir.
- * Input : int levelValue (Sağ volume seviye değeri).
+ * Description : It determines the value of the volume indicators on the right. The range of values can be specified with the volumeStartValue and volumeEndValue methods.
+ * Input : int levelValue (Volume level value on the right).
  * Output : None
  */
 void LC75823::volumeRightLevel(int levelValue) {
@@ -177,8 +177,8 @@ void LC75823::volumeRightLevel(int levelValue) {
 
 /*
 * Function Name: sChart (Scroll Chart)
- * Description : Lcd chart sembollerini animasyonlu olarak yakar.
- * Input : boolean chartValue (0 = Animasyon kapalı, 1 = Animasyon açık).
+ * Description : Lights up animation of lcd chart symbols.
+ * Input : boolean chartValue (0 = Animation off, 1 = Animation on).
  * Output : None
  */
 void LC75823::sChart(boolean chartValue) {
@@ -195,7 +195,7 @@ void LC75823::sChart(boolean chartValue) {
 
 /*
 * Function Name: textLoopCount
- * Description : Girilen metnin ekrandaki tekrar sayısını döndürür.
+ * Description : Returns the number of repetitions of the entered text on the screen.
  * Input : None
  * Output : int
  */
@@ -203,7 +203,7 @@ int LC75823::textLoopCount() { return _loopNumber; }
 
 /*
 * Function Name: _textLoop
- * Description : Gösterilen metnin, tekrar sayısını işler.
+ * Description : Process the repetition count of the displayed text.
  * Input : None
  * Output : None
  */
@@ -216,8 +216,8 @@ void LC75823::_textLoop() {
 
 /*
 * Function Name: text
- * Description : Metni yazdırır.
- * Input : char text[] - Yazdırılacak metni taşıyan char dizisi.
+ * Description : Prints the text.
+ * Input : char text[] - Char array of text to be printed.
  * Output : None
  */
 void LC75823::text(char text[]) {
@@ -237,8 +237,8 @@ void LC75823::text(char text[]) {
 
 /*
  * Function Name: sText (Scroll Text)
- * Description : Metni soldan sağa doğru kaydırarak yazdırır.
- * Input : char text[] - Yazdırılacak metni taşıyan char dizisi.
+ * Description : Prints by scrolling the text from left to right
+ * Input : char text[] - Char array of text to be printed.
  * Output : None
  */
 void LC75823::sText(char text[]) {
@@ -265,7 +265,7 @@ void LC75823::sText(char text[]) {
 
 /*
  * Function Name: _setSymbols
- * Description : Sembol durumlarını, _screen byte dizisine işler.
+ * Description : Saves symbol states to the _screen byte array.
  * Input : None
  * Output : None
  */
@@ -273,8 +273,8 @@ void LC75823::_setSymbols() { bitWrite(_screen[0], 7, _iconSt); }
 
 /*
  * Function Name: _setLetters
- * Description : Girilen metnin lcd boarduna özgü çevrilmiş datalarını, SPI byte data paketlerine uygun hale getirmek için,
- *               gerekli bit kaydırma işlemlerini yapar. Sonuç _screen byte dizisine atanır.
+ * Description : It performs the necessary bit shifting to make the ASCII codes of the entered text suitable for the SPI data package of the lcd driver.
+ *               performs the necessary bit-shifting operations. Result is assigned to the _screen byte array.
  * Input : None
  * Output : None
  */
@@ -306,8 +306,8 @@ void LC75823::_setLetters() {
 
 /*
  * Function Name: _print
- * Description : Hazırlanan _address int değişkenini, _screen ve _symbols byte
- *               dizilerini Arduino SPI kütüphanesini kullanarak sürücüye gönderir. 
+ * Description : Using the Arduino SPI library, it sends the _address int variable, _screen and _symbols byte strings to the driver.
+ *               to send the strings to the lcd using the Arduino SPI library
  * Input : byte pScreen[] 
  * Output : None
  */
@@ -332,9 +332,9 @@ void LC75823::_print(int pAddress, byte pScreen[], byte pSymbols[]) {
 
 /*
  * Function Name: symbol
- * Description : Kullanıcının istediği sembolleri yakar.
- * Input : enum Symbol symbolName(sembol tanımı), 
- *         boolean status(sembolün görünürlüğü, 0 = Kapalı, 1 = Açık)
+ * Description : Shows the symbols the user wants.
+ * Input : enum Symbol symbolName(symbol definition), 
+ *         boolean status(visibility, 0 = Off, 1 = On )
  * Output : None
  */
 void LC75823::symbol(enum Symbol symbolName, boolean status) {
@@ -435,9 +435,9 @@ void LC75823::symbol(enum Symbol symbolName, boolean status) {
 
 /*
  * Function Name: volumeChart
- * Description : Volume sembollerinin integer değerlerle yanıp-sönmesini sağlar.
- * Input : int volumeChartNo(volume sembol numarası), 
- *         boolean status(sembolün görünürlüğü, 0 = Kapalı, 1 = Açık)
+ * Description : Makes the volume symbols blink with int value.
+ * Input : int volumeChartNo(volume symbol number), 
+ *         boolean status(visibility, 0 = Off, 1 = On)
  * Output : None
  */
 void LC75823::volumeChart(int volumeChartNo, boolean status) {
@@ -507,9 +507,9 @@ void LC75823::volumeChart(int volumeChartNo, boolean status) {
 
 /*
  * Function Name: _letters
- * Description : Girilen metindeki karakterlerin ascii karşılıkları ile character.h dosyasında bulunan character14SEG iki boyutlu dizisini 
- *               karşılaştırır ve aldığı değerleri _container byte dizisine aktarır. 
- * Input : char gk[](Girilen metnin ilk 8 karakteri)
+ * Description : Compares the ASCII equivalents of the characters in the entered text with the character14SEG two-dimensional array in the character.h 
+ *               file and transfers the values to the _container byte array.
+ * Input : char gk[](First 8 characters of the text entered)
  * Output : None
  */
 void LC75823::_letters(char gk[]) {

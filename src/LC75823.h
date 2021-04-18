@@ -109,12 +109,7 @@ private:
   // boolean _iconVolumeRight7 = false;
   // boolean _iconVolumeRight8 = false;
   byte _symbols[6];         // 5 SPI byte package for symbol data
-  byte _bellekTasmasi1[10]; // Bellek taşmasına geçici çözüm.
   byte _screen[16];         // 15 SPI byte package for character data
-  byte _bellekTasmasi2[10]; // Bellek taşmasına geçici çözüm. leftBased()
-                            // metodundaki for dönüsünün ikinci if sorgusunda
-                            // bulunan -1 lik sağa öteleme düzeltildikten sonra
-                            // kaldırılabilir.
 };
 
 #endif

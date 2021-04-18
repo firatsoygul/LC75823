@@ -1,9 +1,8 @@
-/* Arduino A0 nolu analog girişine uygulanan voltajın (max. 5 v.)
- * yaklaşık olarak değerini ekranda gösterecektir.
- * Ayrıca volume level simgeleri şiddete göre ayarlanacaktır.
+/* Shows approx voltage from A0 pin (max. 5 v.)
+ * Volume level icons will be adjusted according to the severity.
  *
- *                       *** DİKKAT!! ***
- * ARDUINO GİRİŞLERİNE 5 VOLTTAN DAHA YÜKSEK BİR GERİLİM UYGULAMAYINIZ.
+ *                       *** ATTENTION!! ***
+ * DO NOT APPLY A VOLTAGE HIGHER THAN 5 VOLT TO THE ARDUINO INPUTS.
  */
 
 #include <LC75823.h>

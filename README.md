@@ -1,61 +1,60 @@
-# Arduino library for LC75823
+# LC75823 lcd driver library for Arduino.
 
-Arduino için LC75823 lcd sürücü kütüphanesi.
+[Turkish.](README_tr.md)
 
-Bu kütüphaneyi aynı zamanda CT6523, PT6523, LC75823, SC6523, RSM6523, LF6523, HXJ6523, LP75823, SL4816, SWE75823, ZL75823, TM75823, SJ75823, CS1685, ADS75823, AX75823, CS75823, LS75823, PM1725, PS75823, SC75823 sürücülerinde de kullanabilirsiniz.
+Also you can use this library with CT6523, PT6523, LC75823, SC6523, RSM6523, LF6523, HXJ6523, LP75823, SL4816, SWE75823, ZL75823, TM75823, SJ75823, CS1685, ADS75823, AX75823, CS75823, LS75823, PM1725, PS75823, SC75823.
 
-> Bu kütüphaneyi oluştururken, eski bir kaset çaların ön paneli üzerinde bulunan ekranı kullandım. Büyük ihtimalle benim çalıştığım panelin aynısına sahip olmayacaksınız. Sizin sahibi olduğunuz lcd paneli, tamamen kendine özel alanlar içerecektir. Ancak yukarıdaki sürücülerin herhangi birini içerdiği sürece, segment ve sembol datalarını kendi kartınıza göre düzenleyerek, diğer lcd paneller için de kullanılabilirsiniz. Örnek olarak PT6523 sürücüsü kullanan başka bir lcd panel için düzenlenmiş halini, [bu sayfada](https://github.com/firatsoygul/PT6523) inceleyebilirsiniz. 
+> When creating this library, I used the screen on the front panel of an old cassette player. You probably won't have the same panel as I was working on. The lcd panel you own will contain completely private areas. However, as long as it includes any of the above drivers, you can arrange the segment and symbol data according to your own board and can be used for other lcd panels. As an example, it is edited for another lcd panel using PT6523 driver, [on this page](https://github.com/firatsoygul/PT6523). 
 
 ![image_1](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/alphabet.jpg?raw=true)  
 
 ![image_1a](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/2.jpg?raw=true)
 
-## KURULUM
+## SETUP
 
-- Arduino taslak klasörünüzde bulunan `libraries/` klasörünün altında `LC75823` adında yeni bir klasör oluşturun(libraries klasörü henüz mevcut değilse siz oluşturun).
-- Kütüphane dosyaları içinde bulunan `src/` ve `example/` klasörlerini, yeni oluşturduğunuz `LC75823/` klasörüne yerleştirin.
+- Create a new folder named `LC75823` under the` libraries/`folder in your Arduino draft folder (create it if the `libraries` folder does not exist yet).
+- Place the `src/` and `example/` folders in the library files to the new folder `LC75823/`.
 
-Arduino taslak klasörü, işletim sisteminize bağlı olarak aşağıdaki konumlarda bulunur(eğer değiştirmediyseniz).
+The Arduino sketch folder is located in the following locations depending on your operating system (if you haven't changed it).
 
-- Linux için: `/home/<username>/Arduino/` veya `/home/<username>/sketchbook/`
-- Windows için: `C:\Users\<username>\My Documents\arduino\`
-- Mac için: `/Users/<username>/Documents/Arduino/`
+- Linux: `/home/<username>/Arduino/` or `/home/<username>/sketchbook/`
+- Windows: `C:\Users\<username>\My Documents\arduino\`
+- Mac: `/Users/<username>/Documents/Arduino/`
 
-Ayrıca Arduino IDE menüsünden `Dosya > Tercihler` penceresini açtığınızda, "Taslak Defteri Konumu" alanından da öğrenebilir-değiştirebilirsiniz.
+Also, when you open the `File > Preferences` window from the Arduino IDE menu, you can learn-change from the "Draft Book Location" area.
 
-Dosyaları yerleştirdikten sonra, açık olan bütün Arduino IDE'leri kapatın. Tekrar açtığınızda, IDE otomatik olarak kütüphanelerinizi tekrar tarayacak ve yeni eklediğiniz kütüphaneyi de listesine ekleyecektir. Bunu kontrol etmek için, Arduino IDE'nizi açın ve `Dosya > Örnekler` menüsü altında `LC75823` satırını arayın. Bu satır üzerine geldiğinizde, kullanıma hazır bazı örnekler göreceksiniz.
+After placing the files, close all opened Arduino IDEs. When you turn it back on, the IDE will automatically re-scan your libraries and add the library you just added to its list. To check this, open your Arduino IDE and search for the line `LC75823` under the `File > Examples`__???????????__ menu. When you hover over this line, you will see some examples ready to use. 
 
-## BAĞLANTI
+## CONNECTION 
 
-Bu kütüphane SPI bağlantısı için standart Arduino SPI kütüphanesini kullanır. Bu nedenle;
+This library uses the standard Arduino SPI library for SPI connection. Therefore; 
 
-- Data hattını Arduino 11 nolu pine (veya ICSP soketi üzerindeki 4 nolu MOSI pinine),
-- CLK'yı ise Arduino 13 nolu pine (veya ICSP soketi üzerindeki 3 nolu SCK pinine),
-- FCE (ChipEnabled, SlaveSelect) girişini Arduino 10 nolu pine bağlamak gerekiyor.
+- Data line to Arduino pin 11 (or MOSI pin 4 on the ICSP socket), 
+- CLK to Arduino pin 13 (or SCK pin 3 on the ICSP socket), 
+- FCE (ChipEnabled, SlaveSelect) input needs to be connected to Arduino pin 10.
 
-Bu pinler Arduino Uno modeli için geçerli. Diğer Arduino modelleri için [bu sayfadaki tabloya](https://www.arduino.cc/en/Reference/SPI) bakabilirsiniz. FCE (ChipEnabled, SlaveSelect) girişini ise bütün modellerde Arduino 10 nolu pine bağlıyoruz. Veya `begin(<SlaveSelect pin>, <adres>)` fonksiyonundaki parametreyi başka bir pine ayarlayabilirsiniz. Bağlantı şeması görseldeki gibi olmalıdır.
+These pins are valid for the Arduino Uno model. For other Arduino models please check [this page](https://www.arduino.cc/en/Reference/SPI). FCE (ChipEnabled, SlaveSelect) can be connected to Arduino pin 10 on all models. Or you can set the parameter in the `begin (<SlaveSelect pin>, <address>)` function to another pin. The connection scheme should be as in the image. 
 
 ![image_2](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/baglanti.jpg?raw=true)
 
-## KULLANIMI
+## USAGE
 
-Kütüphaneyi kendi projenizde kullanabilmek için, Arduino IDE menüsünde `Taslak > library ekle > LC75823` yolunu takip edebilirsiniz. Veya kendiniz `.ino` dosyanızın en üstüne aşağıdaki kodu ekleyin.
-
+In order to use the library in your own project, you can follow the path of `Draft > add library > LC75823`__??????????__ in the Arduino IDE menu. Or add the following code at the start of your `.ino` file by yourself. 
 ```C++
 #include <LC75823.h>
 ```
 
-Kütüphaneyi bu şekilde çalışmaya dahil ettikten sonra, kütüphanedeki `LC75823` sınıfından yeni bir nesne üretmeniz gerekiyor.
+After adding the library, you need to generate a new object from the `LC75823` class. 
 
 ```C++
 LC75823 lcd;
 ```
 
-Artık oluşturduğunuz bu yeni `lcd` nesnesi ile, aşağıdaki fonksiyonları kullanabilirsiniz.
+Now you can use the following functions with this new `lcd` object you created. 
 
 ### void begin(int chipEnabledPin, int address)
 
-Bu fonksiyon lcd'yi başlatır. Chip enable `(slaveSelect)` pin  numarasının ve sürücünün SPI adresinin parametre olarak girilmesi gerekiyor. Ayrıca `SPISettings()` ve `SPI.begin()` gibi standart Arduino SPI fonksiyonlarını içerir ve chip enable pinini `OUT` durumuna getirir. Bu işlemlerin ekrana yazdırma yapılmadan önce başlatılması gerektiği için, Arduino `setup()` fonksiyonu içinde tanımlanması gerekiyor.
+This function starts the lcd. Chip enable `slaveSelect` pin number and driver's SPI `address` need to be entered as parameters. It also includes standard Arduino SPI functions such as `SPISettings()` and `SPI.begin()` and sets the chip enable pin to `OUT`. Since these operations must be started before printing to the screen, they must be defined in the Arduino `setup()` function. 
 
 ```C++
 void setup()
@@ -66,43 +65,43 @@ void setup()
 
 ### void text(char text[])
 
-Girilen metni sabit biçimde ekrana yazdırır. Yazdırılacak metin `char` türünde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Ekran aynı anda 8 karakteri gösterebildiği için, girilen metnin ilk 8 karakteri ekranda görünür.
+Prints the entered text on the screen. The text to be printed can be entered as an array of type `char` or can be passed as a string parameter by typing directly between the`""` characters. Since the screen can display 8 characters at the same time, the first 8 characters of the entered text will appear on the screen. 
 
-> Kütüphane yalnızca [ASCII karakter tablosundaki](https://www.arduino.cc/en/Reference/ASCIIchart) 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
+> The library supports only 32 to 127 characters in the [ASCII character table](https://www.arduino.cc/en/Reference/ASCIIchart). Other characters will appear on the screen as two-character spaces. 
 
 ```C++
 void loop()
 {
-  char a[14]="MERHABA DUNYA";
+  char a[14]="HELLO WORLD";
   lcd.text(a);
 
   //veya
 
-  lcd.text("MERHABA DUNYA");
+  lcd.text("HELLO WORLD");
 }
 ```
 
 ### void sText(char text[])
 
-Girilen metni ekran üzerinde sağdan sola doğru kaydırarak yazdırır. Yazdırılacak metin `char` tipinde bir dizi değişkeni olarak girilebilir  veya doğrudan `""` karakterleri arasında yazılarak parametre olarak girilmelidir. Bu yazım şeklinde ekranda gösterilen metnin bir karakter sayı sınırı bulunmaz.
+Prints the entered text by sliding from right to left side of the screen. The text to be printed can be entered as a `char array` or as a string parameter by typing directly between the `""` characters. The text shown on the screen this way does not have a character and number limit. 
 
-> Kütüphane yalnızca [ASCII karakter tablosundaki](https://www.arduino.cc/en/Reference/ASCIIchart) 32 - 127 arası karakterleri destekler. Bunun dışındaki karakterler ekranda iki karakterlik boşluk olarak görünür.
+> The library supports only 32 to 127 characters in the [ASCII character table](https://www.arduino.cc/en/Reference/ASCIIchart). Other characters will appear on the screen as two-character spaces. 
 
 ```C++
 void loop()
 {
-  char a[44]="ARDUINO LC75823 KUTUPHANESI. 01 TEMMUZ 2018";
+  char a[44]="ARDUINO LC75823 TEST. 01 JULY 2018";
   lcd.sText(a);
 
   //veya
 
-  lcd.sText("ARDUINO LC75823 KUTUPHANESI. 01 TEMMUZ 2018");
+  lcd.sText("ARDUINO LC75823 TEST. 01 JULY 2018");
 }
 ```
 
-> Metni taşıyan `char` dizisi tanımlanırken, dizisinin eleman sayısı metnin karakter sayısından 1 fazla olmalıdır. Eğer 12 harfli bir metin giriyorsanız, diziyi 13 elemanlı oluşturmalısınız. Böylece dizinin son elemanına `/0` karakteri otomatik olarak yerleştirilir. Aksi halde, sonlandırma elemanı olmayan bir dizi ekrana yazdırılırken, kendisinden sonra tanımlanmış ya da bellekte kendisinden sonraki adreslerde bulunan alakasız veriler de ekrana yazdırılır.
+> When defining the `char array` that carries the text, count of elements of the array must be 1 more than the number of characters of the text. If you are entering 12 letter text, you must create the array with 13 elements. Thus, the character `\0` is automatically placed in the last element of the array. Otherwise, when a series without a termination element is printed on the screen, irrelevant data defined after it or at addresses after it in the memory are also printed on the screen. 
 
-Bazı durumlarda, `char`, `int` gibi farklı veri tiplerinden oluşan birden fazla veriyi, aynı anda ekrana yazdırmanız gerekebilir. Böylesi durumlarda, `C++` fonksiyonlarından [sprintf()](http://www.cplusplus.com/reference/cstdio/sprintf/)'i kullanabilirsiniz. Aşağıdaki örnekte, bir `int` değişkenin değeri ile bazı `char` karakterler birleştirilerek, lcd nesnesinin `sText()` fonksiyonuna parametre olarak giriliyor.
+In some cases, you may need to printdifferent data types at the same time, such as `char`,` int`. In such cases, you can use [sprintf()](http://www.cplusplus.com/reference/cstdio/sprintf/). In the example below, the value of an `int` variable is combined with some` char` characters and entered as parameters in the `sText ()` function of the lcd object. 
 
 ```C++
 void loop()
@@ -110,12 +109,12 @@ void loop()
   int a = 4;
   int b = 8;
   char buffer[14];
-  sprintf (buffer, "%d ARTI %d = %d", a, b, a+b);
+  sprintf (buffer, "%d PLUS %d = %d", a, b, a+b);
   lcd.sText(buffer);
 }
 ```
 
-`Sprintf()` fonksiyonu `int` veri tipini desteklerken, `float` tipindeki değişkenleri desteklemiyor. Bu durumu aşmak için `dtostrf()` fonksiyonunu kullanabilirsiniz. Aşağıda, bir `float` değişkenin değeri, `dtostrf()` fonksiyonu ile başka bir `char` dizisine aktarılıyor. Bir sonraki adımda ise `sprintf()` fonksiyonunda başka bir `char` dizisiyle birleştiriliyor. Ve son olarak `sText()` fonksiyonu ile ekrana yazdırılıyor.
+While the `Sprintf()` function supports `int` data type, it does not support variables of type `float`. You can use the `dtostrf()` function to overcome this limit. Below, the value of a `float` variable is passed into another string `char` via the `dtostrf()` function. In the next step, it is merged with another `char` array in the `sprintf()` function. And finally, it is printed on the screen with `sText()` function. 
 
 ```C++
 void loop()
@@ -133,40 +132,39 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
+> .ino file containing the sample code above: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### int textLoopCount()
 
-`sText()` fonksiyonu ile soldan sağa kaydırılarak ekrana yazdırılan metnin, ekranda kaç defa döndüğü bilgisini `int` tipinde dışa  döndürür. Bir metnin görünürlüğünü, ekranda belirli sayıda tekrarladıktan sonra sonlandırmak istiyorsanız, bu fonksiyondan dönen değere göre işlem yapabilirsiniz. Aşağıdaki örnekte, girilen metin 3 defa ekranda döndükten sonra döngüden çıkılır ve bir sonraki
-işleme geçilir.
+If the sText () function is used, it returns an int type information about how many times the text is rotated on the screen. If you want to end the visibility of a text after a certain number of times on the screen, you can operate according to the value returned from this function. In the example below, after the text has rotated 3 times on the screen, it exits the loop and moves on to the next action. 
 
 ```C++
 void loop()
 {
   for (int i = 0; lcd.textLoopCount() < 3; i++)
    {
-    lcd.sText("BU METIN EKRANDA 3 DEFA DONECEK.);
+    lcd.sText("THIS TEXT WILL REPEAT ON THE SCREEN 3 TIMES.);
    }
 }
 ```
 
-> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC75823_text/LC75823_text.ino)
+> .ino file containing the sample code above: [`LC75823/examples/LC58823_text/LC75823_text.ino`](examples/LC75823_text/LC75823_text.ino)
 
 ### void symbol(enum Symbol symbolName, boolean status)
 
-Bu fonksiyon ile ekran üzerinde bulunan sembolleri gösterebilir ve gizleyebilirsiniz. Lcd panel üzerindeki tüm sembollere karşılık gelen birer `enum` sabiti tanımlanmıştır. `Symbol` isimli bu `enum` sabitlerinden birini ve içereceği durumu (*`true` veya `1` = göster,  `false` veya `0` = gizle*) bu fonksiyona parametre olarak girerek, ilgili sembolün görünürlüğünü değiştirebilirsiniz.
+This funtcion is used to show and hide the symbols on the screen. An `enum` constant has been defined corresponding to all symbols on the lcd panel. You can change the visibility of the corresponding symbol by entering one of these `enum` constants named` symbol` and the state it will contain (*`true` or `1` = show, `false` or `0` = hide*) as a parameter to this function. 
 
 ```C++
 void loop()
 {
-  // Sembol durum bilgisi true gönderilerek semboller gösteriliyor.
+  // Symbol status information set to true, display them
   boolean sts = true;
   lcd.symbol(POP, sts);
   lcd.symbol(X_BASS, sts);
   lcd.symbol(TEYP_ICON, sts);
   delay(1500);
   
-  // Sembol durum bilgisi 0 gönderilerek semboller gizleniyor.
+  // Symbol status information set to 0, hiding symbols. 
   byte bsts = 0;
   lcd.symbol(POP, bsts);
   lcd.symbol(X_BASS, bsts);
@@ -174,9 +172,9 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
+> .ino file containing the sample code above: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
-Tüm sembol sabitleri aşağıda verilmiştir.
+All symbol constants are given below.
 
 ```C++
   ST,
@@ -210,23 +208,23 @@ Tüm sembol sabitleri aşağıda verilmiştir.
 
 ### void volumeChart(int volumeChartNo, boolean status)
 
-'Volume seviyesi' ve 'chart' gösterimi gibi, sıralı ve birbiri ile bağlantılı bazı sembollerin kontrolü için kullanılır. `symbol()` fonksiyonuyla da müdahale edilebilen `VOLUME_*` ve `CHART_*` sembollerinin durumu, bu fonksiyon ile sıralı `int` değerler girilerek değiştirilebilir. Böylece bu sembolleri bir döngü içinde sıralı işlemlerde kullanabilirsiniz.
+Used to control some sequential and interconnected symbols, such as `volume level` and `chart`. The status of the `VOLUME_ *` and `CHART_ *` symbols, which can also be manipulated with the `symbol()` function, can be changed by entering the sequential `int` values with this function. So you can use these symbols in sequential operations in a loop. 
 
 ```C++
 void loop()
 {
-  // VOLUME_1 sembolünü göster.
+  // Show symbol VOLUME_1.
   lcd.volumeChart(1, true);
 
-  // VOLUME_LEFT_2 sembolünü göster.
+  // Show symbol VOLUME_LEFT_2.
   lcd.volumeChart(2, true);
 
-  // VOLUME_LEFT_3 sembolünü göster.
+  // Show symbol VOLUME_LEFT_3.
   lcd.volumeChart(3, true);
 }
 ```
 
-Volume sembollerinin fonksiyon içindeki sıralaması aşağıda verilmiştir.
+All volume symbol contstants are given below.
 
 ```C++
    1: VOLUME_1
@@ -254,7 +252,7 @@ Volume sembollerinin fonksiyon içindeki sıralaması aşağıda verilmiştir.
 
 ### void volumeLeftLevel(int levelValue), void volumeRightLevel(int levelValue)
 
-Volume seviyesini istenen konuma getirir. 1 nolu sembol ortak olmak üzere, birbirinden ayrı sol ve sağ yedişer, toplamda 15 bağımsız volume sembolü bulunuyor. Bu seviye sembollerini döngüye girmeden bir anda istenilen seviyeye getirmek için kullanılır. Örneğin sol seviyeyi 5. düzeye getirmek için `volumeLeftLevel(5)`, sağ seviyeyi 3. düzeye getirmek için de `volumeRightLevel(3)` komutunu kullanmak yeterli.
+Sets the volume level to the desired value. There are 15 independent volume symbols in total, with the symbol number 1 being common, left and right seven separate from each other. It is used to bring the level symbols to the desired value without going into the loop. For example, it is enough to use the `volumeLeftLevel(5)` command to bring the left level to 5, and to use the `volumeRightLevel(3)` command to bring the right level to 3. 
 
 ```C++
 void loop()
@@ -264,13 +262,13 @@ void loop()
 }
 ```
 
-Seviye basamakları toplam 8 farklı segmentten oluşuyor. Varsayılan olarak en düşük seviye `0`, en yüksek seviye ise `8` kabul edilmiştir. Ancak bu değerleri `volumeStartValue()`, ve `volumeEndValue()` fonksiyonları ile düzenleyebilirsiniz.
+Level steps consist of 8 different segments in total. By default, the lowest level is `0` and the highest level is `8`. However, you can edit these values with  `volumeStartValue()` and `volumeEndValue()` functions. 
 
 ### void volumeStartValue(int startValue), void volumeEndValue(int endValue)
 
-Seviye aralığı olarak 8 birimin yetmediği durumlarda, bu fonksiyonlar ile başlangıç ve bitiş değerleri ayarlanabilir. Örneğin aşağıdaki örnekte, Arduino `A0` nolu analog pinine uygulanan voltajın (max. 5 v.) yaklaşık değeri, seviye simgeleri üzerinde gösterilmiştir. Arduino analog girişten gelen voltaj değerini 0 - 1023 arası bir değere çevirmektedir. Ancak bu değer standart seviye sınırı olan sekizi aştığı için, sekizin üzerindeki her veri, seviyeyi en sona taşır. Bu durumu düzeltmek için, alt ve üst seviye sınırlarını bu iki fonksiyonla bildirebilirsiniz.
+In cases where 8 units are not sufficient as a level range, starting and ending values can be set with these functions. In the example below, the approximate value of the voltage (max 5v) applied to the Arduino analog pin `A0` is shown on the level symbols. Arduino converts the voltage value coming from the analog input to a value between 0 - 1023. However, because this value exceeds the standard level limit of `8`, any data above 8 moves the level to the end. To fix this, you can declare the lower and upper level limits with these two functions. 
 
-Program boyunca bu ayarı değiştirme ihtiyacı duyulmuyorsa, `setup()` fonksiyonu içinde tanımlayınız.
+If it is not necessary to change this setting during the program execution, define it in the `setup()` function. 
 
 ```C++
 void setup()
@@ -292,11 +290,11 @@ void loop()
 
 ![image_3](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/volt.jpg?raw=true)
 
-> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
+> .ino file containing the sample code above: [`LC75823/examples/LC75823_voltage_level/LC75823_voltage_level.ino`](examples/LC75823_voltage_level/LC75823_voltage_level.ino)
 
 ### void sChart(boolean chartValue)
 
-Chart sembollerinin, dönme animasyonu için kullanılır. Fonksiyona `true` veya `1` değeri girildiği sürece, chart sembolleri üzerinde dönüş animasyonu oluşturur.
+Used for rotation animation of chart symbols. Creates a rotation animation on the chart symbols as long as `true` or `1` is entered in the function. 
 
 ```C++
 void loop()
@@ -308,27 +306,27 @@ void loop()
 }
 ```
 
-> Yukarıdaki örnek kodu içeren .ino dosyası: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
+> .ino file containing the sample code above: [`LC75823/examples/LC75823_symbols/LC75823_symbols.ino`](examples/LC75823_symbols/LC75823_symbols.ino)
 
 ### void speed(int textSpeed)
 
-Ekrandaki animasyonların (metin kaydırma, seviye geçişleri, chart animasyonu vb.) hızını belirlemek için kullanılır. Uygulamanın herhangi bir noktasında kullanılabilir. `int` tipindeki parametre milisaniye cinsinden olmalıdır. Belirtilen süre animasyonun geçiş hızını belirler. Dolayısıyla süre ne kadar az ise, animasyonlar o kadar hızlı gösterilir. Hiç bir değer belirtilmemişse, varsayılan değer 300 milisaniye olarak uygulanır.
+Used to setup animation speed(text scrolling, level transitions, chart animation, etc). It can be used at any point in the application. The parameter of type `int` must be in milliseconds. The specified time determines the transition speed of the animation. Therefore, the shorter the time, the faster the animations are shown. If no value is specified, the default value is applied to 300ms. 
 
 ### void clear()
 
-Ekranda o anda yazılı olan karakterleri siler. Metinler arası geçişlerde kullanıldığında, metinlerin iç içe geçme riskini engeller. Her yeni metni ekrana yazdırmadan önce kullanmanız gerekiyor.
+Clears the characters currently written on the screen. When used in transitions between texts, it prevents the risk of text interlacing.
 
 ### void reset()
 
-`clear()` fonksiyonuna ek olarak, `textLoopCount()` ile tutulan metin döngü sayısını, ekrandaki tüm sembolleri, sol ve sağ seviye bilgilerini sıfırlar. Animasyon hızını başlangıç değeri olan 300 milisaniyeye ayarlar. Ekran güç tasarrufu (power saving) modunda ise açılacaktır. Ancak `volumeStartValue()` ve `volumeEndValue()` ile belirlenen seviye aralıklarını **değiştirmez**.
+Resets all symbols on the screen, left and right level information in addition to the `clear()` function. Sets the animation speed to its initial value of 300ms. If the screen is in power saving mode, it will turn on. However, it **does not change the level ranges set by `volumeStartValue()` and `volumeEndValue()`**. 
 
 ### void noDisplay()
 
-Sürücü güç tasarrufu (power saving) moduna geçer. Sürücü içindeki osilatör duracağı ve segment hatlarındaki voltaj Vss değerine çekileceği için, ekran lcd bölümü kapanır. Ekranın batarya ile çalıştırılacağı durumlarda, belirli bir süre sonunda bu moda geçilebilir.
+Put display into power saving mode. Since the oscillator inside the lcd will stop and the voltage on the segment lines will be pulled to the value Vss, the screen lcd section is closed. In cases where the screen is operated with a battery, it can be switched to this mode after a certain period of time. 
 
 ### void display()
 
-Güç tasarrufu (power saving) modunda bulunan sürücüyü normal çalışma moduna geçirir.
+Returns display prom power saving to normal mode
 
 ![image_4](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/full.JPG?raw=true)
 
