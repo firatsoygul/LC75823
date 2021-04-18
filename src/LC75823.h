@@ -109,9 +109,7 @@ private:
   // boolean _iconVolumeRight7 = false;
   // boolean _iconVolumeRight8 = false;
   byte _symbols[6];         // 5 SPI byte package for symbol data
-  byte _buffer1[10];        // Buffer to prevent memory overflow.
   byte _screen[16];         // 15 SPI byte package for character data
-  byte _buffer2[10];        // Buffer to prevent memory overflow. leftBased()
 };
 
 #endif
