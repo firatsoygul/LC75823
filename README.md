@@ -219,8 +219,8 @@ void loop()
   // Show symbol VOLUME_LEFT_2.
   lcd.volumeChart(2, true);
 
-  // Show symbol VOLUME_LEFT_3.
-  lcd.volumeChart(3, true);
+  // Show symbol VOLUME_RIGHT_4.
+  lcd.volumeChart(11, true);
 }
 ```
 
