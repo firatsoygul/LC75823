@@ -333,3 +333,5 @@ Güç tasarrufu (power saving) modunda bulunan sürücüyü normal çalışma mo
 ![image_4](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/full.JPG?raw=true)
 
 ![image_5](https://raw.githubusercontent.com/firatsyg/LC75823/master/img/IMG_0104.JPG?raw=true)
+
+<a href="https://www.buymeacoffee.com/firatsoygul" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
